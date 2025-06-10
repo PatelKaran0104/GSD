@@ -617,25 +617,5 @@ export const preQuestions: Question[] = [
       de: 'Bitte beschreiben Sie alle weiteren relevanten Aspekte.',
       en: 'Please describe any other relevant aspects.'
     }
-  },
-
-  // G. Completion
-  {
-    id: 'pre_completion_time',
-    section: {
-      de: 'G. Abschluss',
-      en: 'G. Completion'
-    },
-    question: {
-      de: 'Wie lange haben Sie für das Ausfüllen des Fragebogens benötigt?',
-      en: 'How long did it take you to complete the questionnaire?'
-    },
-    description: {
-      de: 'Wird automatisch berechnet',
-      en: 'Will be calculated automatically'
-    },
-    type: 'number',
-    required: false,
-    placeholder: 'Minuten / Minutes'
   }
 ];

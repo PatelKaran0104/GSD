@@ -180,10 +180,15 @@ const Questionnaire: React.FC = () => {
       if (startTime) {
         const endTime = new Date();
         const minutesTaken = Math.round((endTime.getTime() - startTime.getTime()) / 60000);
+        
+        // Log completion time to console for research purposes
+        console.log(`${part === 'pre' ? 'Pre-assessment' : 'Post-assessment'} questionnaire completed in ${minutesTaken} minutes`);
+        console.log('Questionnaire data:', formData);
+        
+        // Store completion time in form data for potential future use
         updateFormData(`${part}_completion_time`, minutesTaken.toString());
       }
       
-      console.log("Form data:", formData);
       navigate('/thank-you');
     }
   };
