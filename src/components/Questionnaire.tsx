@@ -89,10 +89,10 @@ const Questionnaire: React.FC = () => {
       
       utterance.onerror = (event) => {
         setIsReading(false);
-        console.error('SpeechSynthesisUtterance error:', event);
         
         // Don't show error for interrupted speech (happens during language switch)
         if (event.error !== 'interrupted') {
+          console.error('SpeechSynthesisUtterance error:', event);
           const errorMessage = language === 'de'
             ? 'Es gab ein Problem beim Vorlesen des Textes. Bitte versuchen Sie es später erneut.'
             : 'There was a problem reading the text. Please try again later.';
