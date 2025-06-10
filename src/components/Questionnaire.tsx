@@ -4,7 +4,7 @@ import { useAppContext } from '../context/AppContext';
 import AccessibilityControls from './AccessibilityControls';
 import { preQuestions } from '../data/preQuestions';
 import { postQuestions } from '../data/postQuestions';
-import { ChevronLeft, ChevronRight, Save, Volume2, XCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Save, Volume2, XCircle, Home } from 'lucide-react';
 
 const Questionnaire: React.FC = () => {
   const { part } = useParams<{ part: string }>();
@@ -18,6 +18,7 @@ const Questionnaire: React.FC = () => {
   const [isReading, setIsReading] = useState(false);
   const [speechSynthesis, setSpeechSynthesis] = useState<SpeechSynthesis | null>(null);
   const [speechError, setSpeechError] = useState<string | null>(null);
+  const [showHomeConfirm, setShowHomeConfirm] = useState(false);
   
   useEffect(() => {
     setStartTime(new Date());
@@ -148,6 +149,19 @@ const Questionnaire: React.FC = () => {
     }
     return 0;
   };
+
+  const handleHomeClick = () => {
+    setShowHomeConfirm(true);
+  };
+
+  const confirmGoHome = () => {
+    stopReading();
+    navigate('/');
+  };
+
+  const cancelGoHome = () => {
+    setShowHomeConfirm(false);
+  };
   
   const handleNext = () => {
     const isAnswered = formData[currentQuestion.id] !== undefined && 
@@ -199,7 +213,7 @@ const Questionnaire: React.FC = () => {
     if (prevStep >= 0) {
       setCurrentStep(prevStep);
     } else {
-      navigate('/');
+      setShowHomeConfirm(true);
     }
   };
 
@@ -378,15 +392,69 @@ const Questionnaire: React.FC = () => {
       <div className="container mx-auto px-4 py-8">
         <AccessibilityControls />
         
+        {/* Home Confirmation Modal */}
+        {showHomeConfirm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className={`${highContrast ? 'bg-black border-2 border-white' : 'bg-white'} rounded-xl p-8 max-w-md mx-4`}>
+              <h3 className={`${fontSize} font-bold mb-4`}>
+                {language === 'de' 
+                  ? 'Zur Startseite zurückkehren?' 
+                  : 'Return to home page?'}
+              </h3>
+              <p className={`${fontSize} mb-6`}>
+                {language === 'de'
+                  ? 'Ihre bisherigen Antworten gehen verloren. Sind Sie sicher?'
+                  : 'Your current answers will be lost. Are you sure?'}
+              </p>
+              <div className="flex space-x-4">
+                <button
+                  onClick={confirmGoHome}
+                  className={`flex-1 py-3 px-4 rounded-lg ${
+                    highContrast 
+                      ? 'bg-white text-black hover:bg-gray-200' 
+                      : 'bg-red-600 text-white hover:bg-red-700'
+                  } transition-colors ${fontSize} font-medium`}
+                >
+                  {language === 'de' ? 'Ja, zurück' : 'Yes, go back'}
+                </button>
+                <button
+                  onClick={cancelGoHome}
+                  className={`flex-1 py-3 px-4 rounded-lg ${
+                    highContrast 
+                      ? 'bg-gray-800 text-white hover:bg-gray-700' 
+                      : 'bg-gray-300 text-gray-800 hover:bg-gray-400'
+                  } transition-colors ${fontSize} font-medium`}
+                >
+                  {language === 'de' ? 'Abbrechen' : 'Cancel'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <div className="max-w-3xl mx-auto mt-12">
           {/* Progress bar */}
           <div className="mb-8">
-            <div className="flex justify-between mb-2">
-              <span className={`${fontSize} font-medium`}>
-                {language === 'de' 
-                  ? `Frage ${currentVisibleIndex + 1} von ${visibleQuestions.length}`
-                  : `Question ${currentVisibleIndex + 1} of ${visibleQuestions.length}`}
-              </span>
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center space-x-4">
+                <span className={`${fontSize} font-medium`}>
+                  {language === 'de' 
+                    ? `Frage ${currentVisibleIndex + 1} von ${visibleQuestions.length}`
+                    : `Question ${currentVisibleIndex + 1} of ${visibleQuestions.length}`}
+                </span>
+                <button
+                  onClick={handleHomeClick}
+                  className={`p-2 rounded-full ${
+                    highContrast 
+                      ? 'bg-white text-black hover:bg-gray-200' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  } transition-colors`}
+                  aria-label={language === 'de' ? "Zur Startseite" : "Go to home"}
+                  title={language === 'de' ? "Zur Startseite" : "Go to home"}
+                >
+                  <Home className="w-5 h-5" />
+                </button>
+              </div>
               <span className={`${fontSize} font-medium`}>{progress}%</span>
             </div>
             <div className={`w-full h-4 rounded-full ${highContrast ? 'bg-gray-800' : 'bg-gray-200'}`}>
