@@ -36,7 +36,7 @@ const ThankYou: React.FC = () => {
             <CheckCircle className={`w-24 h-24 ${highContrast ? 'text-white' : 'text-green-600'}`} />
           </div>
           
-          <h1 className={`${fontSize === 'text-lg' ? 'text-3xl' : fontSize === 'text-xl' ? 'text-4xl' : fontSize === 'text-2xl' ? 'text-5xl' : 'text-6xl'} font-bold text-center mb-8 ${highContrast ? 'text-white' : 'text-blue-900'}`}>
+          <h1 className={`${fontSize === 'text-xl' ? 'text-4xl' : fontSize === 'text-2xl' ? 'text-5xl' : fontSize === 'text-3xl' ? 'text-6xl' : 'text-7xl'} font-bold text-center mb-8 ${highContrast ? 'text-white' : 'text-blue-900'}`}>
             {translations.title[language]}
           </h1>
           

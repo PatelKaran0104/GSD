@@ -18,24 +18,24 @@ const AccessibilityControls: React.FC = () => {
       <div className="flex items-center space-x-4">
         <button
           onClick={decreaseFontSize}
-          className={`p-2 rounded-full ${fontSize === 'text-lg' ? 'opacity-50 cursor-not-allowed' : ''} ${
+          className={`p-2 rounded-full ${fontSize === 'text-xl' ? 'opacity-50 cursor-not-allowed' : ''} ${
             highContrast 
               ? 'bg-white text-black hover:bg-gray-200 focus:ring-white' 
               : 'bg-blue-100 text-blue-800 hover:bg-blue-200 focus:ring-blue-300'
           } focus:outline-none focus:ring-2`}
-          disabled={fontSize === 'text-lg'}
+          disabled={fontSize === 'text-xl'}
           aria-label={language === 'de' ? "Schriftgröße verkleinern" : "Decrease font size"}
         >
           <ZoomOut className="w-6 h-6" />
         </button>
         <button
           onClick={increaseFontSize}
-          className={`p-2 rounded-full ${fontSize === 'text-3xl' ? 'opacity-50 cursor-not-allowed' : ''} ${
+          className={`p-2 rounded-full ${fontSize === 'text-4xl' ? 'opacity-50 cursor-not-allowed' : ''} ${
             highContrast 
               ? 'bg-white text-black hover:bg-gray-200 focus:ring-white' 
               : 'bg-blue-100 text-blue-800 hover:bg-blue-200 focus:ring-blue-300'
           } focus:outline-none focus:ring-2`}
-          disabled={fontSize === 'text-3xl'}
+          disabled={fontSize === 'text-4xl'}
           aria-label={language === 'de' ? "Schriftgröße vergrößern" : "Increase font size"}
         >
           <ZoomIn className="w-6 h-6" />

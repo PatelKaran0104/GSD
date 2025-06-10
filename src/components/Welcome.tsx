@@ -68,7 +68,7 @@ const Welcome: React.FC = () => {
             <Stethoscope className={`w-16 h-16 ${highContrast ? 'text-white' : 'text-blue-700'}`} />
           </div>
           
-          <h1 className={`${fontSize === 'text-lg' ? 'text-3xl' : fontSize === 'text-xl' ? 'text-4xl' : fontSize === 'text-2xl' ? 'text-5xl' : 'text-6xl'} font-bold text-center mb-8 ${highContrast ? 'text-white' : 'text-blue-900'}`}>
+          <h1 className={`${fontSize === 'text-xl' ? 'text-3xl' : fontSize === 'text-2xl' ? 'text-4xl' : fontSize === 'text-3xl' ? 'text-5xl' : 'text-6xl'} font-bold text-center mb-8 ${highContrast ? 'text-white' : 'text-blue-900'}`}>
             {translations.title[language]}
           </h1>
           
@@ -78,7 +78,7 @@ const Welcome: React.FC = () => {
             
             <div className="space-y-6">
               <div className={`p-6 rounded-xl ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
-                <h2 className={`${fontSize === 'text-lg' ? 'text-2xl' : fontSize === 'text-xl' ? 'text-3xl' : fontSize === 'text-2xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
+                <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
                   {translations.part1.title[language]}
                 </h2>
                 <p>{translations.part1.description[language]}</p>
@@ -91,7 +91,7 @@ const Welcome: React.FC = () => {
               </div>
               
               <div className={`p-6 rounded-xl ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
-                <h2 className={`${fontSize === 'text-lg' ? 'text-2xl' : fontSize === 'text-xl' ? 'text-3xl' : fontSize === 'text-2xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
+                <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
                   {translations.part2.title[language]}
                 </h2>
                 <p>{translations.part2.description[language]}</p>

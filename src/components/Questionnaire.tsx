@@ -38,22 +38,18 @@ const Questionnaire: React.FC = () => {
   const currentQuestion = questions[currentStep];
 
   const getSupportedLanguage = (preferredLang: string): string => {
-    // Get available voices
     const voices = speechSynthesis?.getVoices() || [];
     
-    // Try exact match first
     if (voices.some(voice => voice.lang === preferredLang)) {
       return preferredLang;
     }
 
-    // Try generic language code
     const genericLang = preferredLang.split('-')[0];
     const matchingVoice = voices.find(voice => voice.lang.startsWith(genericLang));
     if (matchingVoice) {
       return matchingVoice.lang;
     }
 
-    // Fallback to browser's default language
     return navigator.language || 'en-US';
   };
 
@@ -77,7 +73,6 @@ const Questionnaire: React.FC = () => {
       
       const utterance = new SpeechSynthesisUtterance(questionText + '. ' + optionsText);
       
-      // Get supported language for the current locale
       const supportedLang = getSupportedLanguage(language === 'de' ? 'de-DE' : 'en-US');
       utterance.lang = supportedLang;
       utterance.rate = 0.9;
@@ -96,7 +91,6 @@ const Questionnaire: React.FC = () => {
         setIsReading(false);
         console.error('SpeechSynthesisUtterance error:', event);
         
-        // Provide user-friendly error message based on the error
         const errorMessage = language === 'de'
           ? 'Es gab ein Problem beim Vorlesen des Textes. Bitte versuchen Sie es später erneut.'
           : 'There was a problem reading the text. Please try again later.';
@@ -279,13 +273,13 @@ const Questionnaire: React.FC = () => {
               ))}
             </div>
             <div className="flex justify-between mt-2">
-              <span className={`${fontSize === 'text-lg' ? 'text-sm' : 'text-base'}`}>
+              <span className={`${fontSize === 'text-xl' ? 'text-sm' : 'text-base'}`}>
                 {question.scaleLabels?.[language][0] || ''}
               </span>
-              <span className={`${fontSize === 'text-lg' ? 'text-sm' : 'text-base'} text-center`}>
+              <span className={`${fontSize === 'text-xl' ? 'text-sm' : 'text-base'} text-center`}>
                 {question.scaleLabels?.[language][2] || ''}
               </span>
-              <span className={`${fontSize === 'text-lg' ? 'text-sm' : 'text-base'} text-right`}>
+              <span className={`${fontSize === 'text-xl' ? 'text-sm' : 'text-base'} text-right`}>
                 {question.scaleLabels?.[language][4] || ''}
               </span>
             </div>
@@ -360,12 +354,12 @@ const Questionnaire: React.FC = () => {
           
           {/* Section title */}
           <div className={`${highContrast ? 'bg-blue-900 text-white border-white border-2' : 'bg-blue-700 text-white'} rounded-t-xl px-6 py-4`}>
-            <h2 className={`${fontSize === 'text-lg' ? 'text-xl' : fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : 'text-4xl'} font-bold`}>
+            <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold`}>
               {part === 'pre' 
                 ? language === 'de' ? 'Teil 1: Vorerhebung' : 'Part 1: Pre-assessment'
                 : language === 'de' ? 'Teil 2: Erfolgskontrolle' : 'Part 2: Success evaluation'}
             </h2>
-            <p className={`${fontSize === 'text-lg' ? 'text-base' : fontSize}`}>
+            <p className={`${fontSize === 'text-xl' ? 'text-lg' : fontSize}`}>
               {currentQuestion.section[language]}
             </p>
           </div>
@@ -374,7 +368,7 @@ const Questionnaire: React.FC = () => {
           <div className={`${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'} rounded-b-xl p-8 md:p-10 mb-8`}>
             <div className="mb-8">
               <div className="flex items-start justify-between mb-6">
-                <h3 className={`${fontSize === 'text-lg' ? 'text-2xl' : fontSize === 'text-xl' ? 'text-3xl' : fontSize === 'text-2xl' ? 'text-4xl' : 'text-5xl'} font-bold flex-1 mr-4`}>
+                <h3 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold flex-1 mr-4`}>
                   {currentQuestion.question[language]}
                 </h3>
                 <button

@@ -25,7 +25,8 @@ interface AppProviderProps {
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [formData, setFormData] = useState<FormData>({});
-  const [fontSize, setFontSize] = useState<string>('text-lg');
+  // Changed default font size from 'text-lg' to 'text-xl' for better readability
+  const [fontSize, setFontSize] = useState<string>('text-xl');
   const [highContrast, setHighContrast] = useState<boolean>(false);
   const [language, setLanguage] = useState<'de' | 'en'>(() => {
     const savedLanguage = localStorage.getItem('preferredLanguage');
@@ -44,7 +45,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setFormData({});
   };
 
-  const fontSizes = ['text-lg', 'text-xl', 'text-2xl', 'text-3xl'];
+  // Updated font sizes array to start from text-xl instead of text-lg
+  const fontSizes = ['text-xl', 'text-2xl', 'text-3xl', 'text-4xl'];
   
   const increaseFontSize = () => {
     const currentIndex = fontSizes.indexOf(fontSize);
