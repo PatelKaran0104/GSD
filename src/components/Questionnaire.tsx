@@ -33,7 +33,7 @@ const Questionnaire: React.FC = () => {
         speechSynthesis.cancel();
       }
     };
-  }, [speechSynthesis]);
+  }, [speechSynthesis, language]);
 
   const currentQuestion = questions[currentStep];
 
@@ -91,10 +91,13 @@ const Questionnaire: React.FC = () => {
         setIsReading(false);
         console.error('SpeechSynthesisUtterance error:', event);
         
-        const errorMessage = language === 'de'
-          ? 'Es gab ein Problem beim Vorlesen des Textes. Bitte versuchen Sie es später erneut.'
-          : 'There was a problem reading the text. Please try again later.';
-        setSpeechError(errorMessage);
+        // Don't show error for interrupted speech (happens during language switch)
+        if (event.error !== 'interrupted') {
+          const errorMessage = language === 'de'
+            ? 'Es gab ein Problem beim Vorlesen des Textes. Bitte versuchen Sie es später erneut.'
+            : 'There was a problem reading the text. Please try again later.';
+          setSpeechError(errorMessage);
+        }
       };
 
       speechSynthesis.speak(utterance);
