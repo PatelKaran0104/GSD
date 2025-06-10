@@ -1,6 +1,57 @@
 import { Question } from '../types/questions';
 
 export const preQuestions: Question[] = [
+  // A. Personal Information
+  {
+    id: 'pre_age',
+    section: {
+      de: 'A. Persönliche Angaben',
+      en: 'A. Personal Information'
+    },
+    question: {
+      de: 'Wie alt sind Sie?',
+      en: 'How old are you?'
+    },
+    type: 'number',
+    required: true,
+    placeholder: 'Jahre / Years'
+  },
+  {
+    id: 'pre_gender',
+    section: {
+      de: 'A. Persönliche Angaben',
+      en: 'A. Personal Information'
+    },
+    question: {
+      de: 'Welches Geschlecht haben Sie?',
+      en: 'What is your gender?'
+    },
+    type: 'radio',
+    required: true,
+    options: [
+      {
+        label: {
+          de: 'Weiblich',
+          en: 'Female'
+        },
+        value: 'female'
+      },
+      {
+        label: {
+          de: 'Männlich',
+          en: 'Male'
+        },
+        value: 'male'
+      },
+      {
+        label: {
+          de: 'Divers',
+          en: 'Other'
+        },
+        value: 'other'
+      }
+    ]
+  },
   {
     id: 'pre_walking_distance',
     section: {
@@ -56,6 +107,84 @@ export const preQuestions: Question[] = [
     ],
   },
   {
+    id: 'pre_walking_aids',
+    section: {
+      de: 'A. Persönliche Angaben',
+      en: 'A. Personal Information'
+    },
+    question: {
+      de: 'Welche Gehhilfen verwenden Sie?',
+      en: 'Which walking aids do you use?'
+    },
+    description: {
+      de: '(Mehrfachantwort möglich)',
+      en: '(Multiple answers possible)'
+    },
+    type: 'checkbox',
+    required: true,
+    options: [
+      {
+        label: {
+          de: 'Keine',
+          en: 'None'
+        },
+        value: 'none'
+      },
+      {
+        label: {
+          de: 'Stock',
+          en: 'Walking stick'
+        },
+        value: 'stick'
+      },
+      {
+        label: {
+          de: 'Krücken',
+          en: 'Crutches'
+        },
+        value: 'crutches'
+      },
+      {
+        label: {
+          de: 'Rollator',
+          en: 'Walker'
+        },
+        value: 'walker'
+      },
+      {
+        label: {
+          de: 'Rollstuhl',
+          en: 'Wheelchair'
+        },
+        value: 'wheelchair'
+      },
+      {
+        label: {
+          de: 'Sonstiges',
+          en: 'Other'
+        },
+        value: 'other'
+      }
+    ]
+  },
+  {
+    id: 'pre_walking_aids_other',
+    section: {
+      de: 'A. Persönliche Angaben',
+      en: 'A. Personal Information'
+    },
+    question: {
+      de: 'Bitte geben Sie Ihre sonstige Gehhilfe an:',
+      en: 'Please specify your other walking aid:'
+    },
+    type: 'text',
+    required: false,
+    conditionalDisplay: {
+      questionId: 'pre_walking_aids',
+      value: 'other'
+    }
+  },
+  {
     id: 'pre_conditions',
     section: {
       de: 'A. Persönliche Angaben',
@@ -102,6 +231,13 @@ export const preQuestions: Question[] = [
       },
       {
         label: {
+          de: 'Neurologische Erkrankung',
+          en: 'Neurological disease'
+        },
+        value: 'neurological'
+      },
+      {
+        label: {
           de: 'Sonstiges',
           en: 'Other'
         },
@@ -126,6 +262,8 @@ export const preQuestions: Question[] = [
       value: 'other',
     },
   },
+
+  // B. Current Situation
   {
     id: 'pre_wounds',
     section: {
@@ -159,7 +297,7 @@ export const preQuestions: Question[] = [
       },
     ],
     conditionalNext: {
-      'no': 5,
+      'no': 9,
     },
   },
   {
@@ -179,5 +317,325 @@ export const preQuestions: Question[] = [
       en: 'In a complete application, an interactive foot illustration would be shown here.'
     },
   },
-  
+  {
+    id: 'pre_pain_level',
+    section: {
+      de: 'B. Aktuelle Situation',
+      en: 'B. Current Situation'
+    },
+    question: {
+      de: 'Wie stark sind Ihre Schmerzen beim Gehen?',
+      en: 'How severe is your pain when walking?'
+    },
+    description: {
+      de: '(ICF: b280 Schmerz)',
+      en: '(ICF: b280 Pain)'
+    },
+    type: 'scale',
+    required: true,
+    scaleStart: {
+      de: 'Keine Schmerzen',
+      en: 'No pain'
+    },
+    scaleEnd: {
+      de: 'Sehr starke Schmerzen',
+      en: 'Very severe pain'
+    },
+    scaleLabels: {
+      de: ['Keine', 'Leicht', 'Mäßig', 'Stark', 'Sehr stark'],
+      en: ['None', 'Mild', 'Moderate', 'Severe', 'Very severe']
+    }
+  },
+
+  // C. Current Shoes
+  {
+    id: 'pre_current_shoes',
+    section: {
+      de: 'C. Aktuelle Schuhe',
+      en: 'C. Current Shoes'
+    },
+    question: {
+      de: 'Welche Art von Schuhen tragen Sie normalerweise?',
+      en: 'What type of shoes do you normally wear?'
+    },
+    type: 'checkbox',
+    required: true,
+    options: [
+      {
+        label: {
+          de: 'Normale Straßenschuhe',
+          en: 'Regular street shoes'
+        },
+        value: 'regular'
+      },
+      {
+        label: {
+          de: 'Sportschuhe',
+          en: 'Sports shoes'
+        },
+        value: 'sports'
+      },
+      {
+        label: {
+          de: 'Hausschuhe',
+          en: 'Slippers'
+        },
+        value: 'slippers'
+      },
+      {
+        label: {
+          de: 'Orthopädische Schuhe',
+          en: 'Orthopedic shoes'
+        },
+        value: 'orthopedic'
+      },
+      {
+        label: {
+          de: 'Einlagen in normalen Schuhen',
+          en: 'Insoles in regular shoes'
+        },
+        value: 'insoles'
+      },
+      {
+        label: {
+          de: 'Sonstiges',
+          en: 'Other'
+        },
+        value: 'other'
+      }
+    ]
+  },
+  {
+    id: 'pre_shoe_problems',
+    section: {
+      de: 'C. Aktuelle Schuhe',
+      en: 'C. Current Shoes'
+    },
+    question: {
+      de: 'Haben Sie Probleme mit Ihren aktuellen Schuhen?',
+      en: 'Do you have problems with your current shoes?'
+    },
+    type: 'checkbox',
+    required: true,
+    options: [
+      {
+        label: {
+          de: 'Keine Probleme',
+          en: 'No problems'
+        },
+        value: 'none'
+      },
+      {
+        label: {
+          de: 'Druckstellen',
+          en: 'Pressure points'
+        },
+        value: 'pressure'
+      },
+      {
+        label: {
+          de: 'Schmerzen',
+          en: 'Pain'
+        },
+        value: 'pain'
+      },
+      {
+        label: {
+          de: 'Schlechte Passform',
+          en: 'Poor fit'
+        },
+        value: 'poor_fit'
+      },
+      {
+        label: {
+          de: 'Instabilität',
+          en: 'Instability'
+        },
+        value: 'instability'
+      },
+      {
+        label: {
+          de: 'Sonstiges',
+          en: 'Other'
+        },
+        value: 'other'
+      }
+    ]
+  },
+
+  // D. Expectations
+  {
+    id: 'pre_expectations_walking',
+    section: {
+      de: 'D. Erwartungen',
+      en: 'D. Expectations'
+    },
+    question: {
+      de: 'Wie sehr erwarten Sie, dass orthopädische Schuhe Ihre Gehfähigkeit verbessern?',
+      en: 'How much do you expect orthopedic shoes to improve your walking ability?'
+    },
+    type: 'scale',
+    required: true,
+    scaleStart: {
+      de: 'Überhaupt nicht',
+      en: 'Not at all'
+    },
+    scaleEnd: {
+      de: 'Sehr stark',
+      en: 'Very much'
+    },
+    scaleLabels: {
+      de: ['Überhaupt nicht', 'Wenig', 'Mäßig', 'Stark', 'Sehr stark'],
+      en: ['Not at all', 'A little', 'Moderately', 'Much', 'Very much']
+    }
+  },
+  {
+    id: 'pre_expectations_pain',
+    section: {
+      de: 'D. Erwartungen',
+      en: 'D. Expectations'
+    },
+    question: {
+      de: 'Wie sehr erwarten Sie, dass orthopädische Schuhe Ihre Schmerzen reduzieren?',
+      en: 'How much do you expect orthopedic shoes to reduce your pain?'
+    },
+    type: 'scale',
+    required: true,
+    scaleStart: {
+      de: 'Überhaupt nicht',
+      en: 'Not at all'
+    },
+    scaleEnd: {
+      de: 'Sehr stark',
+      en: 'Very much'
+    },
+    scaleLabels: {
+      de: ['Überhaupt nicht', 'Wenig', 'Mäßig', 'Stark', 'Sehr stark'],
+      en: ['Not at all', 'A little', 'Moderately', 'Much', 'Very much']
+    }
+  },
+  {
+    id: 'pre_expectations_stability',
+    section: {
+      de: 'D. Erwartungen',
+      en: 'D. Expectations'
+    },
+    question: {
+      de: 'Wie sehr erwarten Sie, dass orthopädische Schuhe Ihre Stabilität beim Gehen verbessern?',
+      en: 'How much do you expect orthopedic shoes to improve your stability when walking?'
+    },
+    type: 'scale',
+    required: true,
+    scaleStart: {
+      de: 'Überhaupt nicht',
+      en: 'Not at all'
+    },
+    scaleEnd: {
+      de: 'Sehr stark',
+      en: 'Very much'
+    },
+    scaleLabels: {
+      de: ['Überhaupt nicht', 'Wenig', 'Mäßig', 'Stark', 'Sehr stark'],
+      en: ['Not at all', 'A little', 'Moderately', 'Much', 'Very much']
+    }
+  },
+
+  // E. Quality of Life
+  {
+    id: 'pre_qol_mobility',
+    section: {
+      de: 'E. Lebensqualität',
+      en: 'E. Quality of Life'
+    },
+    question: {
+      de: 'Wie zufrieden sind Sie mit Ihrer aktuellen Mobilität?',
+      en: 'How satisfied are you with your current mobility?'
+    },
+    description: {
+      de: '(ICF: d4 Mobilität)',
+      en: '(ICF: d4 Mobility)'
+    },
+    type: 'scale',
+    required: true,
+    scaleStart: {
+      de: 'Sehr unzufrieden',
+      en: 'Very dissatisfied'
+    },
+    scaleEnd: {
+      de: 'Sehr zufrieden',
+      en: 'Very satisfied'
+    },
+    scaleLabels: {
+      de: ['Sehr unzufrieden', 'Unzufrieden', 'Neutral', 'Zufrieden', 'Sehr zufrieden'],
+      en: ['Very dissatisfied', 'Dissatisfied', 'Neutral', 'Satisfied', 'Very satisfied']
+    }
+  },
+  {
+    id: 'pre_qol_participation',
+    section: {
+      de: 'E. Lebensqualität',
+      en: 'E. Quality of Life'
+    },
+    question: {
+      de: 'Wie sehr schränken Ihre Fußprobleme Ihre Teilnahme am gesellschaftlichen Leben ein?',
+      en: 'How much do your foot problems limit your participation in social life?'
+    },
+    description: {
+      de: '(ICF: d9 Gemeinschafts-, soziales und staatsbürgerliches Leben)',
+      en: '(ICF: d9 Community, social and civic life)'
+    },
+    type: 'scale',
+    required: true,
+    scaleStart: {
+      de: 'Überhaupt nicht',
+      en: 'Not at all'
+    },
+    scaleEnd: {
+      de: 'Sehr stark',
+      en: 'Very much'
+    },
+    scaleLabels: {
+      de: ['Überhaupt nicht', 'Wenig', 'Mäßig', 'Stark', 'Sehr stark'],
+      en: ['Not at all', 'A little', 'Moderately', 'Much', 'Very much']
+    }
+  },
+
+  // F. Additional Information
+  {
+    id: 'pre_additional_info',
+    section: {
+      de: 'F. Zusätzliche Informationen',
+      en: 'F. Additional Information'
+    },
+    question: {
+      de: 'Gibt es weitere Informationen zu Ihren Fußproblemen oder Erwartungen, die Sie mitteilen möchten?',
+      en: 'Is there any additional information about your foot problems or expectations that you would like to share?'
+    },
+    type: 'text',
+    required: false,
+    description: {
+      de: 'Bitte beschreiben Sie alle weiteren relevanten Aspekte.',
+      en: 'Please describe any other relevant aspects.'
+    }
+  },
+
+  // G. Completion
+  {
+    id: 'pre_completion_time',
+    section: {
+      de: 'G. Abschluss',
+      en: 'G. Completion'
+    },
+    question: {
+      de: 'Wie lange haben Sie für das Ausfüllen des Fragebogens benötigt?',
+      en: 'How long did it take you to complete the questionnaire?'
+    },
+    description: {
+      de: 'Wird automatisch berechnet',
+      en: 'Will be calculated automatically'
+    },
+    type: 'number',
+    required: false,
+    placeholder: 'Minuten / Minutes'
+  }
 ];

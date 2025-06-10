@@ -37,6 +37,20 @@ const Questionnaire: React.FC = () => {
 
   const currentQuestion = questions[currentStep];
 
+  // Check if current question should be displayed based on conditional logic
+  const shouldDisplayQuestion = (question: any): boolean => {
+    if (!question.conditionalDisplay) return true;
+    
+    const { questionId, value } = question.conditionalDisplay;
+    const dependentAnswer = formData[questionId];
+    
+    if (Array.isArray(dependentAnswer)) {
+      return dependentAnswer.includes(value);
+    }
+    
+    return dependentAnswer === value;
+  };
+
   const getSupportedLanguage = (preferredLang: string): string => {
     const voices = speechSynthesis?.getVoices() || [];
     
@@ -90,7 +104,6 @@ const Questionnaire: React.FC = () => {
       utterance.onerror = (event) => {
         setIsReading(false);
         
-        // Don't show error for interrupted speech (happens during language switch)
         if (event.error !== 'interrupted') {
           console.error('SpeechSynthesisUtterance error:', event);
           const errorMessage = language === 'de'
@@ -117,6 +130,24 @@ const Questionnaire: React.FC = () => {
       setSpeechError(null);
     }
   };
+
+  const findNextVisibleQuestion = (startIndex: number): number => {
+    for (let i = startIndex; i < questions.length; i++) {
+      if (shouldDisplayQuestion(questions[i])) {
+        return i;
+      }
+    }
+    return questions.length;
+  };
+
+  const findPreviousVisibleQuestion = (startIndex: number): number => {
+    for (let i = startIndex; i >= 0; i--) {
+      if (shouldDisplayQuestion(questions[i])) {
+        return i;
+      }
+    }
+    return 0;
+  };
   
   const handleNext = () => {
     const isAnswered = formData[currentQuestion.id] !== undefined && 
@@ -136,13 +167,15 @@ const Questionnaire: React.FC = () => {
       const answer = formData[currentQuestion.id];
       const nextStep = currentQuestion.conditionalNext[answer as string];
       if (nextStep !== undefined) {
-        setCurrentStep(nextStep);
+        const nextVisibleStep = findNextVisibleQuestion(nextStep);
+        setCurrentStep(nextVisibleStep);
         return;
       }
     }
     
-    if (currentStep < questions.length - 1) {
-      setCurrentStep(currentStep + 1);
+    const nextStep = findNextVisibleQuestion(currentStep + 1);
+    if (nextStep < questions.length) {
+      setCurrentStep(nextStep);
     } else {
       if (startTime) {
         const endTime = new Date();
@@ -157,8 +190,9 @@ const Questionnaire: React.FC = () => {
 
   const handlePrevious = () => {
     stopReading();
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+    const prevStep = findPreviousVisibleQuestion(currentStep - 1);
+    if (prevStep >= 0) {
+      setCurrentStep(prevStep);
     } else {
       navigate('/');
     }
@@ -328,8 +362,11 @@ const Questionnaire: React.FC = () => {
         return null;
     }
   };
-  
-  const progress = Math.round(((currentStep + 1) / questions.length) * 100);
+
+  // Calculate progress based on visible questions
+  const visibleQuestions = questions.filter(shouldDisplayQuestion);
+  const currentVisibleIndex = visibleQuestions.findIndex(q => q.id === currentQuestion.id);
+  const progress = Math.round(((currentVisibleIndex + 1) / visibleQuestions.length) * 100);
   
   return (
     <div className={`min-h-screen ${highContrast ? 'bg-black text-white' : 'bg-blue-50 text-blue-900'} transition-colors duration-300`}>
@@ -342,8 +379,8 @@ const Questionnaire: React.FC = () => {
             <div className="flex justify-between mb-2">
               <span className={`${fontSize} font-medium`}>
                 {language === 'de' 
-                  ? `Frage ${currentStep + 1} von ${questions.length}`
-                  : `Question ${currentStep + 1} of ${questions.length}`}
+                  ? `Frage ${currentVisibleIndex + 1} von ${visibleQuestions.length}`
+                  : `Question ${currentVisibleIndex + 1} of ${visibleQuestions.length}`}
               </span>
               <span className={`${fontSize} font-medium`}>{progress}%</span>
             </div>
@@ -446,7 +483,7 @@ const Questionnaire: React.FC = () => {
                     : ''
                 }`}
               >
-                {currentStep === questions.length - 1 ? (
+                {currentVisibleIndex === visibleQuestions.length - 1 ? (
                   <>
                     <Save className="w-6 h-6 mr-2" />
                     {language === 'de' ? 'Abschließen' : 'Complete'}
