@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import AccessibilityControls from './AccessibilityControls';
-import { CheckCircle, Download, FileText, BarChart3 } from 'lucide-react';
+import { CheckCircle, BarChart3, FileText } from 'lucide-react';
 
 const ThankYou: React.FC = () => {
-  const { fontSize, highContrast, language, formData } = useAppContext();
+  const { fontSize, highContrast, language } = useAppContext();
 
   const translations = {
     title: {
@@ -36,14 +36,6 @@ const ThankYou: React.FC = () => {
       de: 'Bei Nachfragen können Sie sich jederzeit an Ihr medizinisches Team wenden.',
       en: 'For follow-up questions, you can contact your medical team at any time.'
     },
-    downloadData: {
-      de: 'Daten herunterladen',
-      en: 'Download Data'
-    },
-    printSummary: {
-      de: 'Zusammenfassung drucken',
-      en: 'Print Summary'
-    },
     backToHome: {
       de: 'Zurück zur Startseite',
       en: 'Back to Home'
@@ -52,23 +44,6 @@ const ThankYou: React.FC = () => {
       de: 'Neuen Fragebogen starten',
       en: 'Start New Questionnaire'
     }
-  };
-
-  const downloadData = () => {
-    const dataStr = JSON.stringify(formData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `questionnaire-data-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  const printSummary = () => {
-    window.print();
   };
 
   return (
@@ -108,33 +83,6 @@ const ThankYou: React.FC = () => {
                 {translations.followUp[language]}
               </li>
             </ul>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <button
-              onClick={downloadData}
-              className={`flex items-center justify-center py-4 px-6 rounded-lg ${
-                highContrast 
-                  ? 'bg-white text-black hover:bg-gray-200' 
-                  : 'bg-green-600 text-white hover:bg-green-700'
-              } transition-colors ${fontSize} font-medium`}
-            >
-              <Download className="w-5 h-5 mr-2" />
-              {translations.downloadData[language]}
-            </button>
-            
-            <button
-              onClick={printSummary}
-              className={`flex items-center justify-center py-4 px-6 rounded-lg ${
-                highContrast 
-                  ? 'bg-gray-800 text-white hover:bg-gray-700' 
-                  : 'bg-gray-600 text-white hover:bg-gray-700'
-              } transition-colors ${fontSize} font-medium`}
-            >
-              <FileText className="w-5 h-5 mr-2" />
-              {translations.printSummary[language]}
-            </button>
           </div>
           
           {/* Navigation Buttons */}
