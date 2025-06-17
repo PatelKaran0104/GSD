@@ -519,15 +519,19 @@ const Questionnaire: React.FC = () => {
                 </Text>
                 <ActionIcon
                   onClick={handleHomeClick}
-                  variant="light"
+                  variant={highContrast ? "filled" : "light"}
                   color={highContrast ? "gray" : "gray"}
-                  size="md"
+                  size="xl"
                   className="home-button"
                   style={{
                     borderRadius: '50%',
+                    backgroundColor: highContrast ? '#ffffff' : undefined,
+                    color: highContrast ? '#000000' : undefined,
+                    minWidth: '48px',
+                    minHeight: '48px',
                   }}
                 >
-                  <Home size={20} />
+                  <Home size={24} />
                 </ActionIcon>
               </Group>
               <Text fw={600} size="lg">{progress}%</Text>
@@ -605,12 +609,14 @@ const Questionnaire: React.FC = () => {
                   onClick={isReading ? stopReading : readQuestion}
                   variant={highContrast ? "filled" : "light"}
                   color={highContrast ? "gray" : "blue"}
-                  size="lg"
+                  size="xl"
                   className="speech-button"
                   style={{
                     backgroundColor: highContrast ? '#ffffff' : undefined,
                     color: highContrast ? '#000000' : undefined,
                     borderRadius: '50%',
+                    minWidth: '48px',
+                    minHeight: '48px',
                   }}
                 >
                   <Volume2 size={24} className={isReading ? 'animate-pulse' : ''} />
