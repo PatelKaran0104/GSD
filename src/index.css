@@ -7,7 +7,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  padding: 1rem;
+  padding: 1.5rem;
   z-index: 1000;
   border-bottom-left-radius: 0.75rem;
 }
@@ -19,14 +19,14 @@
 .scale-button-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
   margin: 2rem 0;
 }
 
 .scale-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .scale-labels span {
@@ -118,7 +118,7 @@
 
 .high-contrast .mantine-Paper-root {
   background-color: #000000 !important;
-  border: 2px solid #ffffff !important;
+  border: 3px solid #ffffff !important;
   color: #ffffff !important;
 }
 
@@ -166,23 +166,48 @@
   border: 1px solid #000000 !important;
 }
 
-/* Font size classes for dynamic sizing */
-.font-size-xl { font-size: 1.25rem !important; }
-.font-size-2xl { font-size: 1.5rem !important; }
-.font-size-3xl { font-size: 1.875rem !important; }
-.font-size-4xl { font-size: 2.25rem !important; }
+/* Enhanced spacing and sizing for elderly users */
+body {
+  line-height: 1.6 !important;
+}
 
-.font-size-xl h1 { font-size: 2rem !important; }
-.font-size-2xl h1 { font-size: 2.5rem !important; }
-.font-size-3xl h1 { font-size: 3rem !important; }
-.font-size-4xl h1 { font-size: 3.5rem !important; }
+/* Better spacing for all text elements */
+p, div, span {
+  line-height: 1.5 !important;
+}
 
-.font-size-xl h2 { font-size: 1.5rem !important; }
-.font-size-2xl h2 { font-size: 1.875rem !important; }
-.font-size-3xl h2 { font-size: 2.25rem !important; }
-.font-size-4xl h2 { font-size: 2.75rem !important; }
+/* Larger clickable areas */
+.mantine-Button-root {
+  min-height: 48px !important;
+  padding: 0.75rem 1.5rem !important;
+}
 
-.font-size-xl h3 { font-size: 1.375rem !important; }
-.font-size-2xl h3 { font-size: 1.625rem !important; }
-.font-size-3xl h3 { font-size: 2rem !important; }
-.font-size-4xl h3 { font-size: 2.5rem !important; }
+.mantine-ActionIcon-root {
+  min-width: 48px !important;
+  min-height: 48px !important;
+}
+
+/* Better spacing for form elements */
+.mantine-Radio-root,
+.mantine-Checkbox-root {
+  padding: 1rem !important;
+}
+
+/* Enhanced focus indicators */
+.mantine-Button-root:focus,
+.mantine-ActionIcon-root:focus,
+.mantine-TextInput-input:focus,
+.mantine-Textarea-input:focus,
+.mantine-NumberInput-input:focus {
+  outline: 3px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}
+
+.high-contrast .mantine-Button-root:focus,
+.high-contrast .mantine-ActionIcon-root:focus,
+.high-contrast .mantine-TextInput-input:focus,
+.high-contrast .mantine-Textarea-input:focus,
+.high-contrast .mantine-NumberInput-input:focus {
+  outline: 3px solid #ffffff !important;
+  outline-offset: 2px !important;
+}
