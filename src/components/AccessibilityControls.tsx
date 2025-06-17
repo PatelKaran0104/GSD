@@ -18,31 +18,29 @@ const AccessibilityControls: React.FC = () => {
     <Paper 
       className="accessibility-controls" 
       shadow="md" 
-      p="lg"
+      p="md"
       radius="lg"
       style={{
         backgroundColor: highContrast ? '#1e3a8a' : undefined,
         color: highContrast ? 'white' : undefined,
-        border: highContrast ? '3px solid #ffffff' : '2px solid #e5e7eb',
+        border: highContrast ? '2px solid #ffffff' : undefined,
       }}
     >
-      <Group gap="lg">
+      <Group gap="sm">
         <Tooltip label={language === 'de' ? "Schriftgröße verkleinern" : "Decrease font size"}>
           <ActionIcon
             onClick={decreaseFontSize}
             disabled={fontSize === 'text-xl'}
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
-            size="xl"
+            size="lg"
             style={{
               borderRadius: '50%',
               backgroundColor: highContrast ? '#ffffff' : undefined,
               color: highContrast ? '#000000' : undefined,
-              width: '48px',
-              height: '48px',
             }}
           >
-            <ZoomOut size={24} />
+            <ZoomOut size={20} />
           </ActionIcon>
         </Tooltip>
 
@@ -52,16 +50,14 @@ const AccessibilityControls: React.FC = () => {
             disabled={fontSize === 'text-4xl'}
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
-            size="xl"
+            size="lg"
             style={{
               borderRadius: '50%',
               backgroundColor: highContrast ? '#ffffff' : undefined,
               color: highContrast ? '#000000' : undefined,
-              width: '48px',
-              height: '48px',
             }}
           >
-            <ZoomIn size={24} />
+            <ZoomIn size={20} />
           </ActionIcon>
         </Tooltip>
 
@@ -70,16 +66,14 @@ const AccessibilityControls: React.FC = () => {
             onClick={toggleHighContrast}
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
-            size="xl"
+            size="lg"
             style={{
               borderRadius: '50%',
               backgroundColor: highContrast ? '#ffffff' : undefined,
               color: highContrast ? '#000000' : undefined,
-              width: '48px',
-              height: '48px',
             }}
           >
-            <Sun size={24} />
+            <Sun size={20} />
           </ActionIcon>
         </Tooltip>
 
@@ -88,16 +82,14 @@ const AccessibilityControls: React.FC = () => {
             onClick={toggleLanguage}
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
-            size="xl"
+            size="lg"
             style={{
               borderRadius: '50%',
               backgroundColor: highContrast ? '#ffffff' : undefined,
               color: highContrast ? '#000000' : undefined,
-              width: '48px',
-              height: '48px',
             }}
           >
-            <Languages size={24} />
+            <Languages size={20} />
           </ActionIcon>
         </Tooltip>
       </Group>

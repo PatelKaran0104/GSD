@@ -249,44 +249,34 @@ const Questionnaire: React.FC = () => {
             value={formData[question.id] as string || ''}
             onChange={(value) => handleInputChange(question.id, value)}
           >
-            <Stack gap="xl">
+            <Stack gap="md">
               {question.options?.map((option, idx) => (
                 <Paper 
                   key={idx}
-                  p="xl" 
+                  p="lg" 
                   radius="lg"
                   className="radio-option-paper"
                   style={{
-                    border: `3px solid ${formData[question.id] === option.value 
+                    border: `2px solid ${formData[question.id] === option.value 
                       ? (highContrast ? '#ffffff' : '#3b82f6') 
                       : (highContrast ? '#ffffff' : '#e5e7eb')}`,
                     backgroundColor: formData[question.id] === option.value 
                       ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                       : (highContrast ? '#000000' : '#ffffff'),
                     cursor: 'pointer',
-                    minHeight: '80px',
-                    display: 'flex',
-                    alignItems: 'center',
                   }}
                   onClick={() => handleInputChange(question.id, option.value)}
                 >
                   <Radio 
                     value={option.value} 
                     label={option.label[language]}
-                    size="lg"
                     styles={{
                       label: { 
-                        fontSize: fontSize === 'text-xl' ? '1.375rem' : 
-                                 fontSize === 'text-2xl' ? '1.625rem' :
-                                 fontSize === 'text-3xl' ? '2rem' : '2.5rem',
+                        fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                                 fontSize === 'text-2xl' ? '1.5rem' :
+                                 fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
                         fontWeight: 500,
-                        color: highContrast ? '#ffffff' : undefined,
-                        lineHeight: 1.4,
-                        paddingLeft: '1rem',
-                      },
-                      radio: {
-                        width: '24px',
-                        height: '24px',
+                        color: highContrast ? '#ffffff' : undefined
                       }
                     }}
                   />
@@ -302,7 +292,7 @@ const Questionnaire: React.FC = () => {
             value={(formData[question.id] as string[]) || []}
             onChange={(value) => handleInputChange(question.id, value)}
           >
-            <Stack gap="xl">
+            <Stack gap="md">
               {question.options?.map((option, idx) => {
                 const selectedValues = (formData[question.id] as string[]) || [];
                 const isChecked = selectedValues.includes(option.value);
@@ -310,20 +300,17 @@ const Questionnaire: React.FC = () => {
                 return (
                   <Paper 
                     key={idx}
-                    p="xl" 
+                    p="lg" 
                     radius="lg"
                     className="checkbox-option-paper"
                     style={{
-                      border: `3px solid ${isChecked 
+                      border: `2px solid ${isChecked 
                         ? (highContrast ? '#ffffff' : '#3b82f6') 
                         : (highContrast ? '#ffffff' : '#e5e7eb')}`,
                       backgroundColor: isChecked 
                         ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                         : (highContrast ? '#000000' : '#ffffff'),
                       cursor: 'pointer',
-                      minHeight: '80px',
-                      display: 'flex',
-                      alignItems: 'center',
                     }}
                     onClick={() => {
                       const currentValues = [...(formData[question.id] as string[] || [])];
@@ -336,20 +323,13 @@ const Questionnaire: React.FC = () => {
                     <Checkbox 
                       value={option.value} 
                       label={option.label[language]}
-                      size="lg"
                       styles={{
                         label: { 
-                          fontSize: fontSize === 'text-xl' ? '1.375rem' : 
-                                   fontSize === 'text-2xl' ? '1.625rem' :
-                                   fontSize === 'text-3xl' ? '2rem' : '2.5rem',
+                          fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                                   fontSize === 'text-2xl' ? '1.5rem' :
+                                   fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
                           fontWeight: 500,
-                          color: highContrast ? '#ffffff' : undefined,
-                          lineHeight: 1.4,
-                          paddingLeft: '1rem',
-                        },
-                        input: {
-                          width: '24px',
-                          height: '24px',
+                          color: highContrast ? '#ffffff' : undefined
                         }
                       }}
                     />
@@ -362,39 +342,19 @@ const Questionnaire: React.FC = () => {
         
       case 'scale':
         return (
-          <Box mt="xl">
-            <Group justify="space-between" mb="lg">
-              <Text 
-                size="lg" 
-                fw={500}
-                style={{
-                  fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                           fontSize === 'text-2xl' ? '1.5rem' :
-                           fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
-                }}
-              >
-                {question.scaleStart?.[language]}
-              </Text>
-              <Text 
-                size="lg" 
-                fw={500}
-                style={{
-                  fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                           fontSize === 'text-2xl' ? '1.5rem' :
-                           fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
-                }}
-              >
-                {question.scaleEnd?.[language]}
-              </Text>
+          <Box mt="lg">
+            <Group justify="space-between" mb="sm">
+              <Text size="sm">{question.scaleStart?.[language]}</Text>
+              <Text size="sm">{question.scaleEnd?.[language]}</Text>
             </Group>
-            <div className="scale-button-grid" style={{ gap: '1.5rem', margin: '2rem 0' }}>
+            <div className="scale-button-grid">
               {[0, 1, 2, 3, 4].map((value) => (
                 <Button
                   key={value}
                   onClick={() => handleInputChange(question.id, value.toString())}
                   variant={formData[question.id] === value.toString() ? "filled" : "outline"}
                   color={highContrast ? "gray" : "blue"}
-                  size="xl"
+                  size="lg"
                   radius="lg"
                   style={{
                     backgroundColor: formData[question.id] === value.toString() 
@@ -404,52 +364,20 @@ const Questionnaire: React.FC = () => {
                       ? (highContrast ? '#000000' : undefined)
                       : (highContrast ? '#ffffff' : undefined),
                     borderColor: highContrast ? '#ffffff' : undefined,
-                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
-                             fontSize === 'text-2xl' ? '1.875rem' :
-                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem',
+                    fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                             fontSize === 'text-2xl' ? '1.5rem' :
+                             fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
                     fontWeight: 700,
-                    minHeight: '80px',
-                    minWidth: '80px',
-                    borderWidth: '3px',
                   }}
                 >
                   {value}
                 </Button>
               ))}
             </div>
-            <div className="scale-labels" style={{ marginTop: '1rem' }}>
-              <Text 
-                size="md" 
-                style={{
-                  fontSize: fontSize === 'text-xl' ? '1.125rem' : 
-                           fontSize === 'text-2xl' ? '1.25rem' :
-                           fontSize === 'text-3xl' ? '1.5rem' : '1.875rem',
-                }}
-              >
-                {question.scaleLabels?.[language][0] || ''}
-              </Text>
-              <Text 
-                size="md" 
-                ta="center"
-                style={{
-                  fontSize: fontSize === 'text-xl' ? '1.125rem' : 
-                           fontSize === 'text-2xl' ? '1.25rem' :
-                           fontSize === 'text-3xl' ? '1.5rem' : '1.875rem',
-                }}
-              >
-                {question.scaleLabels?.[language][2] || ''}
-              </Text>
-              <Text 
-                size="md" 
-                ta="right"
-                style={{
-                  fontSize: fontSize === 'text-xl' ? '1.125rem' : 
-                           fontSize === 'text-2xl' ? '1.25rem' :
-                           fontSize === 'text-3xl' ? '1.5rem' : '1.875rem',
-                }}
-              >
-                {question.scaleLabels?.[language][4] || ''}
-              </Text>
+            <div className="scale-labels">
+              <Text size="sm">{question.scaleLabels?.[language][0] || ''}</Text>
+              <Text size="sm">{question.scaleLabels?.[language][2] || ''}</Text>
+              <Text size="sm">{question.scaleLabels?.[language][4] || ''}</Text>
             </div>
           </Box>
         );
@@ -459,21 +387,17 @@ const Questionnaire: React.FC = () => {
           <Textarea
             value={formData[question.id] as string || ''}
             onChange={(e) => handleInputChange(question.id, e.target.value)}
-            rows={6}
+            rows={5}
             radius="lg"
-            size="lg"
             placeholder={question.placeholder || ''}
             styles={{
               input: {
-                fontSize: fontSize === 'text-xl' ? '1.375rem' : 
-                         fontSize === 'text-2xl' ? '1.625rem' :
-                         fontSize === 'text-3xl' ? '2rem' : '2.5rem',
+                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                         fontSize === 'text-2xl' ? '1.5rem' :
+                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
                 backgroundColor: highContrast ? '#000000' : undefined,
                 color: highContrast ? '#ffffff' : undefined,
                 borderColor: highContrast ? '#ffffff' : undefined,
-                borderWidth: '2px',
-                padding: '1.5rem',
-                lineHeight: 1.4,
               }
             }}
           />
@@ -486,19 +410,15 @@ const Questionnaire: React.FC = () => {
             onChange={(value) => handleInputChange(question.id, value?.toString() || '')}
             min={0}
             radius="lg"
-            size="lg"
             placeholder={question.placeholder || ''}
             styles={{
               input: {
-                fontSize: fontSize === 'text-xl' ? '1.375rem' : 
-                         fontSize === 'text-2xl' ? '1.625rem' :
-                         fontSize === 'text-3xl' ? '2rem' : '2.5rem',
+                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                         fontSize === 'text-2xl' ? '1.5rem' :
+                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
                 backgroundColor: highContrast ? '#000000' : undefined,
                 color: highContrast ? '#ffffff' : undefined,
                 borderColor: highContrast ? '#ffffff' : undefined,
-                borderWidth: '2px',
-                padding: '1.5rem',
-                height: '80px',
               }
             }}
           />
@@ -517,7 +437,6 @@ const Questionnaire: React.FC = () => {
     minHeight: '100vh',
     backgroundColor: highContrast ? '#000000' : '#eff6ff',
     color: highContrast ? '#ffffff' : '#1e3a8a',
-    padding: '2rem 0',
   };
   
   return (
@@ -529,7 +448,7 @@ const Questionnaire: React.FC = () => {
           opened={showHomeConfirm}
           onClose={cancelGoHome}
           title={
-            <Text fw={700} size="xl">
+            <Text fw={700} size="lg">
               {language === 'de' 
                 ? 'Zur Startseite zurückkehren?' 
                 : 'Return to home page?'}
@@ -537,19 +456,18 @@ const Questionnaire: React.FC = () => {
           }
           radius="lg"
           centered
-          size="md"
         >
-          <Stack gap="xl">
-            <Text size="lg">
+          <Stack gap="md">
+            <Text>
               {language === 'de'
                 ? 'Ihre bisherigen Antworten gehen verloren. Sind Sie sicher?'
                 : 'Your current answers will be lost. Are you sure?'}
             </Text>
-            <Group justify="flex-end" gap="lg">
-              <Button variant="outline" radius="lg" size="lg" onClick={cancelGoHome}>
+            <Group justify="flex-end" gap="sm">
+              <Button variant="outline" radius="lg" onClick={cancelGoHome}>
                 {language === 'de' ? 'Abbrechen' : 'Cancel'}
               </Button>
-              <Button color="red" radius="lg" size="lg" onClick={confirmGoHome}>
+              <Button color="red" radius="lg" onClick={confirmGoHome}>
                 {language === 'de' ? 'Ja, zurück' : 'Yes, go back'}
               </Button>
             </Group>
@@ -560,25 +478,17 @@ const Questionnaire: React.FC = () => {
           {/* Progress Section - Now at the top */}
           <Paper 
             radius="lg" 
-            p="xl"
-            mb="xl"
+            p="lg"
+            mb="lg"
             style={{
               backgroundColor: highContrast ? '#000000' : '#ffffff',
-              border: highContrast ? '3px solid #ffffff' : '2px solid #e5e7eb',
+              border: highContrast ? '2px solid #ffffff' : undefined,
               color: highContrast ? '#ffffff' : undefined,
             }}
           >
-            <Group justify="space-between" align="center" mb="lg">
-              <Group gap="lg">
-                <Text 
-                  fw={600} 
-                  size="xl"
-                  style={{
-                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
-                             fontSize === 'text-2xl' ? '1.875rem' :
-                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem',
-                  }}
-                >
+            <Group justify="space-between" align="center" mb="md">
+              <Group gap="md">
+                <Text fw={600} size="lg">
                   {language === 'de' 
                     ? `Frage ${currentVisibleIndex + 1} von ${visibleQuestions.length}`
                     : `Question ${currentVisibleIndex + 1} of ${visibleQuestions.length}`}
@@ -587,38 +497,25 @@ const Questionnaire: React.FC = () => {
                   onClick={handleHomeClick}
                   variant="light"
                   color={highContrast ? "gray" : "gray"}
-                  size="xl"
+                  size="md"
                   className="home-button"
                   style={{
                     borderRadius: '50%',
-                    width: '48px',
-                    height: '48px',
                   }}
                 >
-                  <Home size={24} />
+                  <Home size={20} />
                 </ActionIcon>
               </Group>
-              <Text 
-                fw={600} 
-                size="xl"
-                style={{
-                  fontSize: fontSize === 'text-xl' ? '1.5rem' : 
-                           fontSize === 'text-2xl' ? '1.875rem' :
-                           fontSize === 'text-3xl' ? '2.25rem' : '2.75rem',
-                }}
-              >
-                {progress}%
-              </Text>
+              <Text fw={600} size="lg">{progress}%</Text>
             </Group>
             <Progress 
               value={progress} 
-              size="xl" 
+              size="lg" 
               radius="xl"
               color={highContrast ? "gray" : "blue"}
               styles={{
                 root: {
-                  backgroundColor: highContrast ? '#333333' : '#e5e7eb',
-                  height: '16px',
+                  backgroundColor: highContrast ? '#333333' : undefined,
                 },
                 bar: {
                   backgroundColor: highContrast ? '#ffffff' : undefined,
@@ -634,29 +531,21 @@ const Questionnaire: React.FC = () => {
               backgroundColor: highContrast ? '#1e3a8a' : '#1d4ed8',
               color: '#ffffff',
             }}
-            p="xl"
+            p="lg"
           >
             <Title 
               order={2}
               style={{ 
-                fontSize: fontSize === 'text-xl' ? '1.75rem' : 
-                         fontSize === 'text-2xl' ? '2.125rem' :
-                         fontSize === 'text-3xl' ? '2.5rem' : '3rem',
-                marginBottom: '0.5rem',
+                fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                         fontSize === 'text-2xl' ? '1.875rem' :
+                         fontSize === 'text-3xl' ? '2.25rem' : '2.75rem'
               }}
             >
               {part === 'pre' 
                 ? language === 'de' ? 'Teil 1: Vorerhebung' : 'Part 1: Pre-assessment'
                 : language === 'de' ? 'Teil 2: Erfolgskontrolle' : 'Part 2: Success evaluation'}
             </Title>
-            <Text 
-              size="xl"
-              style={{
-                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                         fontSize === 'text-2xl' ? '1.5rem' :
-                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
-              }}
-            >
+            <Text size="lg">
               {currentQuestion.section[language]}
             </Text>
           </Paper>
@@ -665,27 +554,25 @@ const Questionnaire: React.FC = () => {
           <Paper 
             shadow="xl" 
             radius="lg" 
-            p="2xl" 
+            p="xl" 
             mt={0}
             style={{
               backgroundColor: highContrast ? '#000000' : undefined,
-              border: highContrast ? '3px solid #ffffff' : '2px solid #e5e7eb',
+              border: highContrast ? '2px solid #ffffff' : undefined,
               color: highContrast ? '#ffffff' : undefined,
               borderTopLeftRadius: 0,
               borderTopRightRadius: 0,
             }}
           >
-            <Stack gap="2xl">
-              <Flex justify="space-between" align="flex-start" gap="xl">
+            <Stack gap="lg">
+              <Flex justify="space-between" align="flex-start" gap="md">
                 <Title 
                   order={3}
                   style={{ 
                     flex: 1,
-                    fontSize: fontSize === 'text-xl' ? '1.625rem' : 
-                             fontSize === 'text-2xl' ? '1.875rem' :
-                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem',
-                    lineHeight: 1.3,
-                    marginBottom: '1rem',
+                    fontSize: fontSize === 'text-xl' ? '1.375rem' : 
+                             fontSize === 'text-2xl' ? '1.625rem' :
+                             fontSize === 'text-3xl' ? '2rem' : '2.5rem'
                   }}
                 >
                   {currentQuestion.question[language]}
@@ -694,18 +581,15 @@ const Questionnaire: React.FC = () => {
                   onClick={isReading ? stopReading : readQuestion}
                   variant={highContrast ? "filled" : "light"}
                   color={highContrast ? "gray" : "blue"}
-                  size="xl"
+                  size="lg"
                   className="speech-button"
                   style={{
                     backgroundColor: highContrast ? '#ffffff' : undefined,
                     color: highContrast ? '#000000' : undefined,
                     borderRadius: '50%',
-                    width: '56px',
-                    height: '56px',
-                    flexShrink: 0,
                   }}
                 >
-                  <Volume2 size={28} className={isReading ? 'animate-pulse' : ''} />
+                  <Volume2 size={24} className={isReading ? 'animate-pulse' : ''} />
                 </ActionIcon>
               </Flex>
               
@@ -713,12 +597,6 @@ const Questionnaire: React.FC = () => {
                 <Text 
                   c={highContrast ? "gray.3" : "gray.6"}
                   size="lg"
-                  style={{
-                    fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                             fontSize === 'text-2xl' ? '1.5rem' :
-                             fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
-                    marginBottom: '1rem',
-                  }}
                 >
                   {currentQuestion.description[language]}
                 </Text>
@@ -726,51 +604,42 @@ const Questionnaire: React.FC = () => {
 
               {speechError && (
                 <Alert 
-                  icon={<XCircle size={20} />} 
+                  icon={<XCircle size={16} />} 
                   color="red"
                   radius="lg"
                   variant={highContrast ? "filled" : "light"}
-                  p="lg"
                 >
-                  <Text size="lg">{speechError}</Text>
+                  {speechError}
                 </Alert>
               )}
 
               {showError && (
                 <Alert 
-                  icon={<XCircle size={20} />} 
+                  icon={<XCircle size={16} />} 
                   color="red"
                   radius="lg"
                   variant={highContrast ? "filled" : "light"}
-                  p="lg"
                 >
-                  <Text size="lg">
-                    {language === 'de'
-                      ? 'Bitte wählen Sie eine Antwort aus, bevor Sie fortfahren.'
-                      : 'Please select an answer before continuing.'}
-                  </Text>
+                  {language === 'de'
+                    ? 'Bitte wählen Sie eine Antwort aus, bevor Sie fortfahren.'
+                    : 'Please select an answer before continuing.'}
                 </Alert>
               )}
               
               {renderQuestionContent()}
             </Stack>
             
-            <Group justify="space-between" mt="2xl" pt="xl">
+            <Group justify="space-between" mt="xl">
               <Button
                 onClick={handlePrevious}
                 variant={highContrast ? "filled" : "light"}
                 color={highContrast ? "gray" : "gray"}
-                size="xl"
+                size="lg"
                 radius="lg"
-                leftSection={<ChevronLeft size={24} />}
+                leftSection={<ChevronLeft size={20} />}
                 style={{
                   backgroundColor: highContrast ? '#ffffff' : undefined,
                   color: highContrast ? '#000000' : undefined,
-                  fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                           fontSize === 'text-2xl' ? '1.5rem' :
-                           fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
-                  padding: '1rem 2rem',
-                  height: '64px',
                 }}
               >
                 {language === 'de' ? 'Zurück' : 'Back'}
@@ -778,7 +647,7 @@ const Questionnaire: React.FC = () => {
               
               <Button
                 onClick={handleNext}
-                size="xl"
+                size="lg"
                 radius="lg"
                 variant={highContrast ? "filled" : "filled"}
                 color={highContrast ? "gray" : "blue"}
@@ -791,17 +660,12 @@ const Questionnaire: React.FC = () => {
                 }
                 rightSection={
                   currentVisibleIndex === visibleQuestions.length - 1 ? 
-                    <Save size={24} /> : 
-                    <ChevronRight size={24} />
+                    <Save size={20} /> : 
+                    <ChevronRight size={20} />
                 }
                 style={{
                   backgroundColor: highContrast ? '#ffffff' : undefined,
                   color: highContrast ? '#000000' : undefined,
-                  fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                           fontSize === 'text-2xl' ? '1.5rem' :
-                           fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
-                  padding: '1rem 2rem',
-                  height: '64px',
                 }}
               >
                 {currentVisibleIndex === visibleQuestions.length - 1 ? (
