@@ -9,8 +9,7 @@
   right: 0;
   padding: 1rem;
   z-index: 1000;
-  border-bottom-left-radius: 0.75rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-bottom-left-radius: 0.5rem;
 }
 
 .question-progress {
@@ -27,14 +26,12 @@
 .scale-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }
 
 .scale-labels span {
   text-align: center;
   flex: 1;
-  font-weight: 500;
 }
 
 .scale-labels span:first-child {
@@ -53,298 +50,80 @@
   margin-left: 1rem;
 }
 
-/* Enhanced styling for better visual hierarchy */
-.welcome-container {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  min-height: 100vh;
+/* High contrast mode overrides */
+.high-contrast {
+  --mantine-color-body: #000000 !important;
+  --mantine-color-text: #ffffff !important;
+  --mantine-color-white: #000000 !important;
+  --mantine-color-gray-0: #000000 !important;
+  --mantine-color-gray-1: #1a1a1a !important;
+  --mantine-color-gray-2: #333333 !important;
+  --mantine-color-blue-6: #ffffff !important;
+  --mantine-color-blue-7: #ffffff !important;
+  --mantine-color-blue-8: #ffffff !important;
+  --mantine-color-blue-9: #ffffff !important;
 }
 
-.questionnaire-container {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  min-height: 100vh;
+.high-contrast .mantine-Paper-root {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
 }
 
-.thankyou-container {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  min-height: 100vh;
+.high-contrast .mantine-Button-root {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
 }
 
-/* Dark mode with greyish background for better readability */
-.dark-mode {
-  --mantine-color-body: #1f2937 !important;
-  --mantine-color-text: #f9fafb !important;
-  --mantine-color-white: #374151 !important;
-  --mantine-color-gray-0: #374151 !important;
-  --mantine-color-gray-1: #4b5563 !important;
-  --mantine-color-gray-2: #6b7280 !important;
-  --mantine-color-blue-6: #f9fafb !important;
-  --mantine-color-blue-7: #f9fafb !important;
-  --mantine-color-blue-8: #f9fafb !important;
-  --mantine-color-blue-9: #f9fafb !important;
+.high-contrast .mantine-Button-root:hover {
+  background-color: #cccccc !important;
 }
 
-.dark-mode .welcome-container,
-.dark-mode .questionnaire-container,
-.dark-mode .thankyou-container {
-  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+.high-contrast .mantine-Progress-root {
+  background-color: #333333 !important;
 }
 
-.dark-mode .mantine-Paper-root {
-  background-color: #374151 !important;
-  border: 2px solid #d1d5db !important;
-  color: #f9fafb !important;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
+.high-contrast .mantine-Progress-bar {
+  background-color: #ffffff !important;
 }
 
-.dark-mode .mantine-Button-root {
-  background-color: #f9fafb !important;
-  color: #1f2937 !important;
-  border-color: #f9fafb !important;
-  font-weight: 600 !important;
+.high-contrast .mantine-Radio-root,
+.high-contrast .mantine-Checkbox-root {
+  --mantine-color-blue-6: #ffffff !important;
 }
 
-.dark-mode .mantine-Button-root:hover {
-  background-color: #e5e7eb !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.high-contrast .mantine-TextInput-input,
+.high-contrast .mantine-Textarea-input,
+.high-contrast .mantine-NumberInput-input {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 
-.dark-mode .mantine-Button-root[data-variant="outline"] {
-  background-color: transparent !important;
-  color: #f9fafb !important;
-  border-color: #f9fafb !important;
+.high-contrast .mantine-Alert-root {
+  background-color: #660000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 
-.dark-mode .mantine-Button-root[data-variant="outline"]:hover {
-  background-color: #4b5563 !important;
-  color: #f9fafb !important;
-}
+/* Font size classes for dynamic sizing */
+.font-size-xl { font-size: 1.25rem !important; }
+.font-size-2xl { font-size: 1.5rem !important; }
+.font-size-3xl { font-size: 1.875rem !important; }
+.font-size-4xl { font-size: 2.25rem !important; }
 
-.dark-mode .mantine-Progress-root {
-  background-color: #4b5563 !important;
-}
+.font-size-xl h1 { font-size: 2rem !important; }
+.font-size-2xl h1 { font-size: 2.5rem !important; }
+.font-size-3xl h1 { font-size: 3rem !important; }
+.font-size-4xl h1 { font-size: 3.5rem !important; }
 
-.dark-mode .mantine-Progress-bar {
-  background-color: #f9fafb !important;
-}
+.font-size-xl h2 { font-size: 1.5rem !important; }
+.font-size-2xl h2 { font-size: 1.875rem !important; }
+.font-size-3xl h2 { font-size: 2.25rem !important; }
+.font-size-4xl h2 { font-size: 2.75rem !important; }
 
-.dark-mode .mantine-Radio-root,
-.dark-mode .mantine-Checkbox-root {
-  --mantine-color-blue-6: #f9fafb !important;
-}
-
-.dark-mode .mantine-TextInput-input,
-.dark-mode .mantine-Textarea-input,
-.dark-mode .mantine-NumberInput-input {
-  background-color: #374151 !important;
-  color: #f9fafb !important;
-  border-color: #d1d5db !important;
-  font-size: inherit !important;
-  line-height: 1.6 !important;
-}
-
-.dark-mode .mantine-Alert-root {
-  background-color: #7f1d1d !important;
-  color: #f9fafb !important;
-  border-color: #d1d5db !important;
-}
-
-.dark-mode .accessibility-controls {
-  background-color: #4b5563 !important;
-  border: 2px solid #d1d5db !important;
-}
-
-.dark-mode .section-header {
-  background-color: #4b5563 !important;
-  color: #f9fafb !important;
-  border: 2px solid #d1d5db !important;
-}
-
-.dark-mode .option-card {
-  background-color: #374151 !important;
-  border: 2px solid #6b7280 !important;
-  color: #f9fafb !important;
-}
-
-.dark-mode .option-card.selected {
-  background-color: #4b5563 !important;
-  border-color: #f9fafb !important;
-}
-
-.dark-mode .info-section {
-  background-color: #4b5563 !important;
-  border: 2px solid #d1d5db !important;
-  color: #f9fafb !important;
-}
-
-/* Enhanced font sizes for better readability for elderly users */
-.font-size-xl { 
-  font-size: 1.375rem !important; 
-  line-height: 1.7 !important;
-}
-.font-size-2xl { 
-  font-size: 1.625rem !important; 
-  line-height: 1.7 !important;
-}
-.font-size-3xl { 
-  font-size: 2rem !important; 
-  line-height: 1.6 !important;
-}
-.font-size-4xl { 
-  font-size: 2.5rem !important; 
-  line-height: 1.6 !important;
-}
-
-.font-size-xl h1 { 
-  font-size: 2.25rem !important; 
-  line-height: 1.4 !important;
-  font-weight: 700 !important;
-}
-.font-size-2xl h1 { 
-  font-size: 2.75rem !important; 
-  line-height: 1.4 !important;
-  font-weight: 700 !important;
-}
-.font-size-3xl h1 { 
-  font-size: 3.25rem !important; 
-  line-height: 1.3 !important;
-  font-weight: 700 !important;
-}
-.font-size-4xl h1 { 
-  font-size: 3.75rem !important; 
-  line-height: 1.3 !important;
-  font-weight: 700 !important;
-}
-
-.font-size-xl h2 { 
-  font-size: 1.75rem !important; 
-  line-height: 1.5 !important;
-  font-weight: 600 !important;
-}
-.font-size-2xl h2 { 
-  font-size: 2.125rem !important; 
-  line-height: 1.5 !important;
-  font-weight: 600 !important;
-}
-.font-size-3xl h2 { 
-  font-size: 2.5rem !important; 
-  line-height: 1.4 !important;
-  font-weight: 600 !important;
-}
-.font-size-4xl h2 { 
-  font-size: 3rem !important; 
-  line-height: 1.4 !important;
-  font-weight: 600 !important;
-}
-
-.font-size-xl h3 { 
-  font-size: 1.5rem !important; 
-  line-height: 1.5 !important;
-  font-weight: 600 !important;
-}
-.font-size-2xl h3 { 
-  font-size: 1.875rem !important; 
-  line-height: 1.5 !important;
-  font-weight: 600 !important;
-}
-.font-size-3xl h3 { 
-  font-size: 2.25rem !important; 
-  line-height: 1.4 !important;
-  font-weight: 600 !important;
-}
-.font-size-4xl h3 { 
-  font-size: 2.75rem !important; 
-  line-height: 1.4 !important;
-  font-weight: 600 !important;
-}
-
-/* Enhanced button styles */
-.mantine-Button-root {
-  transition: all 0.2s ease-in-out;
-  font-weight: 600;
-  border-radius: 0.75rem;
-}
-
-.mantine-Button-root:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Enhanced paper styles */
-.mantine-Paper-root {
-  border-radius: 1rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  transition: all 0.2s ease-in-out;
-}
-
-/* Enhanced option cards */
-.option-card {
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  border-radius: 0.75rem;
-}
-
-.option-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-.option-card.selected {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
-}
-
-/* Enhanced progress bar */
-.mantine-Progress-root {
-  border-radius: 1rem;
-  overflow: hidden;
-}
-
-/* Enhanced form inputs */
-.mantine-TextInput-input,
-.mantine-Textarea-input,
-.mantine-NumberInput-input {
-  border-radius: 0.75rem;
-  border-width: 2px;
-  transition: all 0.2s ease-in-out;
-  font-size: inherit;
-  line-height: 1.6;
-}
-
-.mantine-TextInput-input:focus,
-.mantine-Textarea-input:focus,
-.mantine-NumberInput-input:focus {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-}
-
-/* Enhanced scale buttons */
-.scale-button-grid .mantine-Button-root {
-  aspect-ratio: 1;
-  border-radius: 0.75rem;
-  font-size: inherit;
-  font-weight: 700;
-  min-height: 3.5rem;
-}
-
-/* Enhanced accessibility controls */
-.accessibility-controls .mantine-ActionIcon-root {
-  border-radius: 0.75rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.accessibility-controls .mantine-ActionIcon-root:hover {
-  transform: scale(1.05);
-}
-
-/* Enhanced modal */
-.mantine-Modal-content {
-  border-radius: 1rem;
-  overflow: hidden;
-}
-
-/* Enhanced alert */
-.mantine-Alert-root {
-  border-radius: 0.75rem;
-  border-width: 2px;
-}
+.font-size-xl h3 { font-size: 1.375rem !important; }
+.font-size-2xl h3 { font-size: 1.625rem !important; }
+.font-size-3xl h3 { font-size: 2rem !important; }
+.font-size-4xl h3 { font-size: 2.5rem !important; }

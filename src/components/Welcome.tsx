@@ -59,8 +59,14 @@ const Welcome: React.FC = () => {
     }
   };
 
+  const containerStyle = {
+    minHeight: '100vh',
+    backgroundColor: highContrast ? '#000000' : '#eff6ff',
+    color: highContrast ? '#ffffff' : '#1e3a8a',
+  };
+
   return (
-    <div className={`welcome-container ${fontSize} ${highContrast ? 'dark-mode' : ''}`}>
+    <div style={containerStyle} className={`${fontSize} ${highContrast ? 'high-contrast' : ''}`}>
       <Container size="md" py="xl">
         <AccessibilityControls />
         
@@ -70,16 +76,13 @@ const Welcome: React.FC = () => {
           p="xl"
           mt="xl"
           style={{
-            backgroundColor: highContrast ? undefined : '#ffffff',
-            border: highContrast ? undefined : '1px solid #e5e7eb',
+            backgroundColor: highContrast ? '#000000' : undefined,
+            border: highContrast ? '2px solid #ffffff' : undefined,
+            color: highContrast ? '#ffffff' : undefined,
           }}
         >
           <Center mb="xl">
-            <Stethoscope 
-              size={72} 
-              color={highContrast ? '#f9fafb' : '#1d4ed8'} 
-              strokeWidth={1.5}
-            />
+            <Stethoscope size={64} color={highContrast ? '#ffffff' : '#1d4ed8'} />
           </Center>
           
           <Title 
@@ -87,80 +90,51 @@ const Welcome: React.FC = () => {
             ta="center" 
             mb="xl"
             style={{ 
-              color: highContrast ? '#f9fafb' : '#1e3a8a',
-              fontWeight: 700,
-              letterSpacing: '-0.025em'
+              color: highContrast ? '#ffffff' : '#1e3a8a',
+              fontSize: fontSize === 'text-xl' ? '2rem' : 
+                       fontSize === 'text-2xl' ? '2.5rem' :
+                       fontSize === 'text-3xl' ? '3rem' : '3.5rem'
             }}
           >
             {translations.title[language]}
           </Title>
           
-          <Stack gap="xl" mb="xl">
-            <Text 
-              size="lg" 
-              ta="center"
-              style={{ 
-                lineHeight: 1.7,
-                color: highContrast ? '#e5e7eb' : '#374151'
-              }}
-            >
-              {translations.welcome[language]}
-            </Text>
-            <Text 
-              size="lg" 
-              fw={500}
-              ta="center"
-              style={{ 
-                color: highContrast ? '#f9fafb' : '#1f2937'
-              }}
-            >
-              {translations.parts[language]}
-            </Text>
+          <Stack gap="lg" mb="xl">
+            <Text size="lg">{translations.welcome[language]}</Text>
+            <Text size="lg">{translations.parts[language]}</Text>
             
-            <Stack gap="xl">
+            <Stack gap="lg">
               <Paper 
-                p="xl" 
-                radius="xl"
-                className={`info-section ${highContrast ? '' : ''}`}
+                p="lg" 
+                radius="lg"
                 style={{
-                  backgroundColor: highContrast ? undefined : '#eff6ff',
-                  border: highContrast ? undefined : '2px solid #dbeafe',
-                  transition: 'all 0.2s ease-in-out'
+                  backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
+                  border: highContrast ? '2px solid #ffffff' : undefined,
                 }}
               >
                 <Title 
                   order={2} 
                   mb="md"
                   style={{ 
-                    color: highContrast ? '#f9fafb' : '#1e40af',
-                    fontWeight: 600
+                    color: highContrast ? '#ffffff' : '#1e40af',
+                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                             fontSize === 'text-2xl' ? '1.875rem' :
+                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem'
                   }}
                 >
                   {translations.part1.title[language]}
                 </Title>
-                <Text 
-                  mb="xl" 
-                  size="lg"
-                  style={{ 
-                    lineHeight: 1.6,
-                    color: highContrast ? '#e5e7eb' : '#374151'
-                  }}
-                >
-                  {translations.part1.description[language]}
-                </Text>
+                <Text mb="lg">{translations.part1.description[language]}</Text>
                 <Button 
                   component={Link} 
                   to="/questionnaire/pre" 
                   fullWidth
-                  size="xl"
-                  variant="filled"
-                  color="blue"
+                  size="lg"
+                  variant={highContrast ? "filled" : "filled"}
+                  color={highContrast ? "gray" : "blue"}
                   style={{
-                    fontSize: '1.125rem',
-                    fontWeight: 600,
-                    padding: '1rem 2rem',
-                    backgroundColor: highContrast ? '#f9fafb' : '#2563eb',
-                    color: highContrast ? '#1f2937' : '#ffffff',
+                    backgroundColor: highContrast ? '#ffffff' : undefined,
+                    color: highContrast ? '#000000' : undefined,
                   }}
                 >
                   {translations.part1.button[language]}
@@ -168,48 +142,36 @@ const Welcome: React.FC = () => {
               </Paper>
               
               <Paper 
-                p="xl" 
-                radius="xl"
-                className={`info-section ${highContrast ? '' : ''}`}
+                p="lg" 
+                radius="lg"
                 style={{
-                  backgroundColor: highContrast ? undefined : '#eff6ff',
-                  border: highContrast ? undefined : '2px solid #dbeafe',
-                  transition: 'all 0.2s ease-in-out'
+                  backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
+                  border: highContrast ? '2px solid #ffffff' : undefined,
                 }}
               >
                 <Title 
                   order={2} 
                   mb="md"
                   style={{ 
-                    color: highContrast ? '#f9fafb' : '#1e40af',
-                    fontWeight: 600
+                    color: highContrast ? '#ffffff' : '#1e40af',
+                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                             fontSize === 'text-2xl' ? '1.875rem' :
+                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem'
                   }}
                 >
                   {translations.part2.title[language]}
                 </Title>
-                <Text 
-                  mb="xl" 
-                  size="lg"
-                  style={{ 
-                    lineHeight: 1.6,
-                    color: highContrast ? '#e5e7eb' : '#374151'
-                  }}
-                >
-                  {translations.part2.description[language]}
-                </Text>
+                <Text mb="lg">{translations.part2.description[language]}</Text>
                 <Button 
                   component={Link} 
                   to="/questionnaire/post" 
                   fullWidth
-                  size="xl"
-                  variant="filled"
-                  color="blue"
+                  size="lg"
+                  variant={highContrast ? "filled" : "filled"}
+                  color={highContrast ? "gray" : "blue"}
                   style={{
-                    fontSize: '1.125rem',
-                    fontWeight: 600,
-                    padding: '1rem 2rem',
-                    backgroundColor: highContrast ? '#f9fafb' : '#2563eb',
-                    color: highContrast ? '#1f2937' : '#ffffff',
+                    backgroundColor: highContrast ? '#ffffff' : undefined,
+                    color: highContrast ? '#000000' : undefined,
                   }}
                 >
                   {translations.part2.button[language]}
@@ -222,11 +184,6 @@ const Welcome: React.FC = () => {
             <Text 
               c={highContrast ? "gray.3" : "gray.6"}
               ta="center"
-              size="lg"
-              style={{ 
-                fontStyle: 'italic',
-                lineHeight: 1.6
-              }}
             >
               {translations.selectPart[language]}
             </Text>
