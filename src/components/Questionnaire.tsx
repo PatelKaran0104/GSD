@@ -262,9 +262,7 @@ const Questionnaire: React.FC = () => {
                     backgroundColor: formData[question.id] === option.value 
                       ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                       : (highContrast ? '#000000' : '#ffffff'),
-                    cursor: 'pointer',
                   }}
-                  onClick={() => handleInputChange(question.id, option.value)}
                 >
                   <Radio 
                     value={option.value} 
@@ -308,14 +306,6 @@ const Questionnaire: React.FC = () => {
                       backgroundColor: isChecked 
                         ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                         : (highContrast ? '#000000' : '#ffffff'),
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => {
-                      const currentValues = [...(formData[question.id] as string[] || [])];
-                      const newValues = isChecked 
-                        ? currentValues.filter(v => v !== option.value)
-                        : [...currentValues, option.value];
-                      handleInputChange(question.id, newValues);
                     }}
                   >
                     <Checkbox 
