@@ -267,7 +267,6 @@ const Questionnaire: React.FC = () => {
                     minHeight: '80px',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'flex-start',
                   }}
                   onClick={() => handleInputChange(question.id, option.value)}
                 >
@@ -275,21 +274,6 @@ const Questionnaire: React.FC = () => {
                     value={option.value} 
                     label={option.label[language]}
                     styles={{
-                      root: {
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                      },
-                      body: {
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                      },
-                      labelWrapper: {
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                      },
                       label: { 
                         fontSize: fontSize === 'text-xl' ? '1.375rem' : 
                                  fontSize === 'text-2xl' ? '1.625rem' :
@@ -297,12 +281,10 @@ const Questionnaire: React.FC = () => {
                         fontWeight: 500,
                         color: highContrast ? '#ffffff' : undefined,
                         lineHeight: 1.4,
-                        marginLeft: '16px',
                       },
                       radio: {
                         width: '24px',
                         height: '24px',
-                        flexShrink: 0,
                       }
                     }}
                   />
@@ -340,7 +322,6 @@ const Questionnaire: React.FC = () => {
                       minHeight: '80px',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'flex-start',
                     }}
                     onClick={() => {
                       const currentValues = [...(formData[question.id] as string[] || [])];
@@ -354,21 +335,6 @@ const Questionnaire: React.FC = () => {
                       value={option.value} 
                       label={option.label[language]}
                       styles={{
-                        root: {
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: '100%',
-                        },
-                        body: {
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: '100%',
-                        },
-                        labelWrapper: {
-                          display: 'flex',
-                          alignItems: 'center',
-                          width: '100%',
-                        },
                         label: { 
                           fontSize: fontSize === 'text-xl' ? '1.375rem' : 
                                    fontSize === 'text-2xl' ? '1.625rem' :
@@ -376,12 +342,10 @@ const Questionnaire: React.FC = () => {
                           fontWeight: 500,
                           color: highContrast ? '#ffffff' : undefined,
                           lineHeight: 1.4,
-                          marginLeft: '16px',
                         },
                         input: {
                           width: '24px',
                           height: '24px',
-                          flexShrink: 0,
                         }
                       }}
                     />
