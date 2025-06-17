@@ -92,6 +92,16 @@
   border-radius: 0.75rem !important;
 }
 
+/* Tooltip z-index fix - ensure tooltips appear in front */
+.mantine-Tooltip-tooltip {
+  z-index: 10000 !important;
+}
+
+/* Floating tooltip portal */
+.mantine-FloatingPortal {
+  z-index: 10000 !important;
+}
+
 /* High contrast mode overrides */
 .high-contrast {
   --mantine-color-body: #000000 !important;
@@ -147,6 +157,13 @@
   background-color: #660000 !important;
   color: #ffffff !important;
   border-color: #ffffff !important;
+}
+
+/* High contrast tooltips */
+.high-contrast .mantine-Tooltip-tooltip {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
 }
 
 /* Font size classes for dynamic sizing */
