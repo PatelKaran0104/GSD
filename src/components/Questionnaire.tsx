@@ -249,11 +249,11 @@ const Questionnaire: React.FC = () => {
             value={formData[question.id] as string || ''}
             onChange={(value) => handleInputChange(question.id, value)}
           >
-            <Stack gap="md">
+            <Stack gap="xl">
               {question.options?.map((option, idx) => (
                 <Paper 
                   key={idx}
-                  p="lg" 
+                  p="xl" 
                   radius="lg"
                   className="radio-option-paper"
                   style={{
@@ -264,6 +264,9 @@ const Questionnaire: React.FC = () => {
                       ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                       : (highContrast ? '#000000' : '#ffffff'),
                     cursor: 'pointer',
+                    minHeight: '80px',
+                    display: 'flex',
+                    alignItems: 'center',
                   }}
                   onClick={() => handleInputChange(question.id, option.value)}
                 >
@@ -272,11 +275,16 @@ const Questionnaire: React.FC = () => {
                     label={option.label[language]}
                     styles={{
                       label: { 
-                        fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                                 fontSize === 'text-2xl' ? '1.5rem' :
-                                 fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                        fontSize: fontSize === 'text-xl' ? '1.375rem' : 
+                                 fontSize === 'text-2xl' ? '1.625rem' :
+                                 fontSize === 'text-3xl' ? '2rem' : '2.5rem',
                         fontWeight: 500,
-                        color: highContrast ? '#ffffff' : undefined
+                        color: highContrast ? '#ffffff' : undefined,
+                        lineHeight: 1.4,
+                      },
+                      radio: {
+                        width: '24px',
+                        height: '24px',
                       }
                     }}
                   />
@@ -292,7 +300,7 @@ const Questionnaire: React.FC = () => {
             value={(formData[question.id] as string[]) || []}
             onChange={(value) => handleInputChange(question.id, value)}
           >
-            <Stack gap="md">
+            <Stack gap="xl">
               {question.options?.map((option, idx) => {
                 const selectedValues = (formData[question.id] as string[]) || [];
                 const isChecked = selectedValues.includes(option.value);
@@ -300,7 +308,7 @@ const Questionnaire: React.FC = () => {
                 return (
                   <Paper 
                     key={idx}
-                    p="lg" 
+                    p="xl" 
                     radius="lg"
                     className="checkbox-option-paper"
                     style={{
@@ -311,6 +319,9 @@ const Questionnaire: React.FC = () => {
                         ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                         : (highContrast ? '#000000' : '#ffffff'),
                       cursor: 'pointer',
+                      minHeight: '80px',
+                      display: 'flex',
+                      alignItems: 'center',
                     }}
                     onClick={() => {
                       const currentValues = [...(formData[question.id] as string[] || [])];
@@ -325,11 +336,16 @@ const Questionnaire: React.FC = () => {
                       label={option.label[language]}
                       styles={{
                         label: { 
-                          fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                                   fontSize === 'text-2xl' ? '1.5rem' :
-                                   fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                          fontSize: fontSize === 'text-xl' ? '1.375rem' : 
+                                   fontSize === 'text-2xl' ? '1.625rem' :
+                                   fontSize === 'text-3xl' ? '2rem' : '2.5rem',
                           fontWeight: 500,
-                          color: highContrast ? '#ffffff' : undefined
+                          color: highContrast ? '#ffffff' : undefined,
+                          lineHeight: 1.4,
+                        },
+                        input: {
+                          width: '24px',
+                          height: '24px',
                         }
                       }}
                     />
@@ -342,10 +358,10 @@ const Questionnaire: React.FC = () => {
         
       case 'scale':
         return (
-          <Box mt="lg">
-            <Group justify="space-between" mb="sm">
-              <Text size="sm">{question.scaleStart?.[language]}</Text>
-              <Text size="sm">{question.scaleEnd?.[language]}</Text>
+          <Box mt="xl">
+            <Group justify="space-between" mb="lg">
+              <Text size="lg" fw={500}>{question.scaleStart?.[language]}</Text>
+              <Text size="lg" fw={500}>{question.scaleEnd?.[language]}</Text>
             </Group>
             <div className="scale-button-grid">
               {[0, 1, 2, 3, 4].map((value) => (
@@ -354,7 +370,7 @@ const Questionnaire: React.FC = () => {
                   onClick={() => handleInputChange(question.id, value.toString())}
                   variant={formData[question.id] === value.toString() ? "filled" : "outline"}
                   color={highContrast ? "gray" : "blue"}
-                  size="lg"
+                  size="xl"
                   radius="lg"
                   style={{
                     backgroundColor: formData[question.id] === value.toString() 
@@ -364,10 +380,12 @@ const Questionnaire: React.FC = () => {
                       ? (highContrast ? '#000000' : undefined)
                       : (highContrast ? '#ffffff' : undefined),
                     borderColor: highContrast ? '#ffffff' : undefined,
-                    fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                             fontSize === 'text-2xl' ? '1.5rem' :
-                             fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                             fontSize === 'text-2xl' ? '1.875rem' :
+                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem',
                     fontWeight: 700,
+                    minHeight: '80px',
+                    minWidth: '80px',
                   }}
                 >
                   {value}
@@ -375,9 +393,9 @@ const Questionnaire: React.FC = () => {
               ))}
             </div>
             <div className="scale-labels">
-              <Text size="sm">{question.scaleLabels?.[language][0] || ''}</Text>
-              <Text size="sm">{question.scaleLabels?.[language][2] || ''}</Text>
-              <Text size="sm">{question.scaleLabels?.[language][4] || ''}</Text>
+              <Text size="md" fw={500}>{question.scaleLabels?.[language][0] || ''}</Text>
+              <Text size="md" fw={500}>{question.scaleLabels?.[language][2] || ''}</Text>
+              <Text size="md" fw={500}>{question.scaleLabels?.[language][4] || ''}</Text>
             </div>
           </Box>
         );
@@ -387,17 +405,20 @@ const Questionnaire: React.FC = () => {
           <Textarea
             value={formData[question.id] as string || ''}
             onChange={(e) => handleInputChange(question.id, e.target.value)}
-            rows={5}
+            rows={6}
             radius="lg"
+            size="xl"
             placeholder={question.placeholder || ''}
             styles={{
               input: {
-                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                         fontSize === 'text-2xl' ? '1.5rem' :
-                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                fontSize: fontSize === 'text-xl' ? '1.375rem' : 
+                         fontSize === 'text-2xl' ? '1.625rem' :
+                         fontSize === 'text-3xl' ? '2rem' : '2.5rem',
                 backgroundColor: highContrast ? '#000000' : undefined,
                 color: highContrast ? '#ffffff' : undefined,
                 borderColor: highContrast ? '#ffffff' : undefined,
+                padding: '20px',
+                minHeight: '120px',
               }
             }}
           />
@@ -410,15 +431,18 @@ const Questionnaire: React.FC = () => {
             onChange={(value) => handleInputChange(question.id, value?.toString() || '')}
             min={0}
             radius="lg"
+            size="xl"
             placeholder={question.placeholder || ''}
             styles={{
               input: {
-                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                         fontSize === 'text-2xl' ? '1.5rem' :
-                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                fontSize: fontSize === 'text-xl' ? '1.375rem' : 
+                         fontSize === 'text-2xl' ? '1.625rem' :
+                         fontSize === 'text-3xl' ? '2rem' : '2.5rem',
                 backgroundColor: highContrast ? '#000000' : undefined,
                 color: highContrast ? '#ffffff' : undefined,
                 borderColor: highContrast ? '#ffffff' : undefined,
+                padding: '20px',
+                minHeight: '80px',
               }
             }}
           />
@@ -564,15 +588,15 @@ const Questionnaire: React.FC = () => {
               borderTopRightRadius: 0,
             }}
           >
-            <Stack gap="lg">
+            <Stack gap="xl">
               <Flex justify="space-between" align="flex-start" gap="md">
                 <Title 
                   order={3}
                   style={{ 
                     flex: 1,
-                    fontSize: fontSize === 'text-xl' ? '1.375rem' : 
-                             fontSize === 'text-2xl' ? '1.625rem' :
-                             fontSize === 'text-3xl' ? '2rem' : '2.5rem'
+                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                             fontSize === 'text-2xl' ? '1.875rem' :
+                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem'
                   }}
                 >
                   {currentQuestion.question[language]}
@@ -634,12 +658,14 @@ const Questionnaire: React.FC = () => {
                 onClick={handlePrevious}
                 variant={highContrast ? "filled" : "light"}
                 color={highContrast ? "gray" : "gray"}
-                size="lg"
+                size="xl"
                 radius="lg"
                 leftSection={<ChevronLeft size={20} />}
                 style={{
                   backgroundColor: highContrast ? '#ffffff' : undefined,
                   color: highContrast ? '#000000' : undefined,
+                  minHeight: '60px',
+                  fontSize: '1.125rem',
                 }}
               >
                 {language === 'de' ? 'Zurück' : 'Back'}
@@ -647,7 +673,7 @@ const Questionnaire: React.FC = () => {
               
               <Button
                 onClick={handleNext}
-                size="lg"
+                size="xl"
                 radius="lg"
                 variant={highContrast ? "filled" : "filled"}
                 color={highContrast ? "gray" : "blue"}
@@ -666,6 +692,8 @@ const Questionnaire: React.FC = () => {
                 style={{
                   backgroundColor: highContrast ? '#ffffff' : undefined,
                   color: highContrast ? '#000000' : undefined,
+                  minHeight: '60px',
+                  fontSize: '1.125rem',
                 }}
               >
                 {currentVisibleIndex === visibleQuestions.length - 1 ? (
