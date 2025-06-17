@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import AccessibilityControls from './AccessibilityControls';
+import { Container, Paper, Title, Text, Button, Stack, Group, Center, List } from '@mantine/core';
 import { CheckCircle, BarChart3, FileText } from 'lucide-react';
 
 const ThankYou: React.FC = () => {
@@ -46,71 +47,126 @@ const ThankYou: React.FC = () => {
     }
   };
 
+  const containerStyle = {
+    minHeight: '100vh',
+    backgroundColor: highContrast ? '#000000' : '#eff6ff',
+    color: highContrast ? '#ffffff' : '#1e3a8a',
+  };
+
   return (
-    <div className={`min-h-screen ${highContrast ? 'bg-black text-white' : 'bg-blue-50 text-blue-900'} transition-colors duration-300`}>
-      <div className="container py-8">
+    <div style={containerStyle} className={`${fontSize} ${highContrast ? 'high-contrast' : ''}`}>
+      <Container size="lg" py="xl">
         <AccessibilityControls />
         
-        <div className={`thank-you-container ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'}`}>
-          <div className="flex justify-center mb-6">
-            <CheckCircle className={`w-24 h-24 ${highContrast ? 'text-white' : 'text-green-600'}`} />
-          </div>
+        <Paper 
+          shadow="xl" 
+          radius="xl" 
+          p="xl"
+          mt="xl"
+          style={{
+            backgroundColor: highContrast ? '#000000' : undefined,
+            border: highContrast ? '2px solid #ffffff' : undefined,
+            color: highContrast ? '#ffffff' : undefined,
+          }}
+        >
+          <Center mb="xl">
+            <CheckCircle size={96} color={highContrast ? '#ffffff' : '#16a34a'} />
+          </Center>
           
-          <h1 className={`${fontSize === 'text-xl' ? 'text-4xl' : fontSize === 'text-2xl' ? 'text-5xl' : fontSize === 'text-3xl' ? 'text-6xl' : 'text-7xl'} font-bold text-center mb-8 ${highContrast ? 'text-white' : 'text-blue-900'}`}>
+          <Title 
+            order={1} 
+            ta="center" 
+            mb="xl"
+            style={{ 
+              color: highContrast ? '#ffffff' : '#1e3a8a',
+              fontSize: fontSize === 'text-xl' ? '2.5rem' : 
+                       fontSize === 'text-2xl' ? '3rem' :
+                       fontSize === 'text-3xl' ? '3.5rem' : '4rem'
+            }}
+          >
             {translations.title[language]}
-          </h1>
+          </Title>
           
-          <div className={`${fontSize} text-center space-y-6 mb-12`}>
-            <p className="font-semibold">{translations.submitted[language]}</p>
-            <p>{translations.thanks[language]}</p>
-            <p className={`${highContrast ? 'text-gray-300' : 'text-gray-600'}`}>
+          <Stack gap="lg" mb="xl" ta="center">
+            <Text size="lg" fw={600}>{translations.submitted[language]}</Text>
+            <Text size="lg">{translations.thanks[language]}</Text>
+            <Text 
+              size="lg" 
+              c={highContrast ? "gray.3" : "gray.6"}
+            >
               {translations.dataInfo[language]}
-            </p>
-          </div>
+            </Text>
+          </Stack>
 
-          {/* Next Steps Section */}
-          <div className={`next-steps-card ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
-            <h2 className={`${fontSize} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
+          <Paper 
+            p="lg" 
+            radius="lg" 
+            mb="xl"
+            style={{
+              backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
+              border: highContrast ? '2px solid #ffffff' : undefined,
+            }}
+          >
+            <Title 
+              order={2} 
+              mb="md"
+              style={{ 
+                color: highContrast ? '#ffffff' : '#1e40af',
+                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                         fontSize === 'text-2xl' ? '1.5rem' :
+                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem'
+              }}
+            >
               {translations.nextSteps[language]}
-            </h2>
-            <ul className={`${fontSize} space-y-3 ${highContrast ? 'text-gray-300' : 'text-gray-700'}`}>
-              <li className="flex items-start">
-                <BarChart3 className="w-5 h-5 mr-3 mt-1 flex-shrink-0" />
+            </Title>
+            <List 
+              spacing="sm"
+              style={{ color: highContrast ? '#cccccc' : '#374151' }}
+            >
+              <List.Item 
+                icon={<BarChart3 size={20} />}
+              >
                 {translations.doctorInfo[language]}
-              </li>
-              <li className="flex items-start">
-                <FileText className="w-5 h-5 mr-3 mt-1 flex-shrink-0" />
+              </List.Item>
+              <List.Item 
+                icon={<FileText size={20} />}
+              >
                 {translations.followUp[language]}
-              </li>
-            </ul>
-          </div>
+              </List.Item>
+            </List>
+          </Paper>
           
-          {/* Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/"
-              className={`py-4 px-8 rounded-lg text-center ${
-                highContrast 
-                  ? 'bg-white text-black hover:bg-gray-200' 
-                  : 'bg-blue-700 text-white hover:bg-blue-800'
-              } transition-colors font-bold ${fontSize}`}
+          <Group justify="center" gap="md">
+            <Button 
+              component={Link} 
+              to="/" 
+              size="lg"
+              variant={highContrast ? "filled" : "filled"}
+              color={highContrast ? "gray" : "blue"}
+              style={{
+                backgroundColor: highContrast ? '#ffffff' : undefined,
+                color: highContrast ? '#000000' : undefined,
+              }}
             >
               {translations.backToHome[language]}
-            </Link>
+            </Button>
             
-            <Link
-              to="/"
-              className={`py-4 px-8 rounded-lg text-center ${
-                highContrast 
-                  ? 'bg-gray-800 text-white hover:bg-gray-700 border-2 border-white' 
-                  : 'bg-white text-blue-700 border-2 border-blue-700 hover:bg-blue-50'
-              } transition-colors font-bold ${fontSize}`}
+            <Button 
+              component={Link} 
+              to="/" 
+              size="lg"
+              variant={highContrast ? "outline" : "outline"}
+              color={highContrast ? "gray" : "blue"}
+              style={{
+                borderColor: highContrast ? '#ffffff' : undefined,
+                color: highContrast ? '#ffffff' : undefined,
+              }}
             >
               {translations.newQuestionnaire[language]}
-            </Link>
-          </div>
-        </div>
-      </div>
+            </Button>
+          </Group>
+        </Paper>
+      </Container>
     </div>
   );
 };

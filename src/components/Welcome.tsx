@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import AccessibilityControls from './AccessibilityControls';
+import { Container, Paper, Title, Text, Button, Stack, Group, Center } from '@mantine/core';
 import { Stethoscope } from 'lucide-react';
 
 const Welcome: React.FC = () => {
@@ -58,60 +59,137 @@ const Welcome: React.FC = () => {
     }
   };
 
+  const containerStyle = {
+    minHeight: '100vh',
+    backgroundColor: highContrast ? '#000000' : '#eff6ff',
+    color: highContrast ? '#ffffff' : '#1e3a8a',
+  };
+
   return (
-    <div className={`min-h-screen ${highContrast ? 'bg-black text-white' : 'bg-blue-50 text-blue-900'} transition-colors duration-300`}>
-      <div className="container py-8">
+    <div style={containerStyle} className={`${fontSize} ${highContrast ? 'high-contrast' : ''}`}>
+      <Container size="md" py="xl">
         <AccessibilityControls />
         
-        <div className={`welcome-container ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'}`}>
-          <div className="flex justify-center mb-6">
-            <Stethoscope className={`w-16 h-16 ${highContrast ? 'text-white' : 'text-blue-700'}`} />
-          </div>
+        <Paper 
+          shadow="xl" 
+          radius="xl" 
+          p="xl"
+          mt="xl"
+          style={{
+            backgroundColor: highContrast ? '#000000' : undefined,
+            border: highContrast ? '2px solid #ffffff' : undefined,
+            color: highContrast ? '#ffffff' : undefined,
+          }}
+        >
+          <Center mb="xl">
+            <Stethoscope size={64} color={highContrast ? '#ffffff' : '#1d4ed8'} />
+          </Center>
           
-          <h1 className={`${fontSize === 'text-xl' ? 'text-3xl' : fontSize === 'text-2xl' ? 'text-4xl' : fontSize === 'text-3xl' ? 'text-5xl' : 'text-6xl'} font-bold text-center mb-8 ${highContrast ? 'text-white' : 'text-blue-900'}`}>
+          <Title 
+            order={1} 
+            ta="center" 
+            mb="xl"
+            style={{ 
+              color: highContrast ? '#ffffff' : '#1e3a8a',
+              fontSize: fontSize === 'text-xl' ? '2rem' : 
+                       fontSize === 'text-2xl' ? '2.5rem' :
+                       fontSize === 'text-3xl' ? '3rem' : '3.5rem'
+            }}
+          >
             {translations.title[language]}
-          </h1>
+          </Title>
           
-          <div className={`${fontSize} space-y-6 mb-12`}>
-            <p className="mb-6">{translations.welcome[language]}</p>
-            <p className="mb-6">{translations.parts[language]}</p>
+          <Stack gap="lg" mb="xl">
+            <Text size="lg">{translations.welcome[language]}</Text>
+            <Text size="lg">{translations.parts[language]}</Text>
             
-            <div className="space-y-6">
-              <div className={`part-card ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
-                <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
+            <Stack gap="lg">
+              <Paper 
+                p="lg" 
+                radius="lg"
+                style={{
+                  backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
+                  border: highContrast ? '2px solid #ffffff' : undefined,
+                }}
+              >
+                <Title 
+                  order={2} 
+                  mb="md"
+                  style={{ 
+                    color: highContrast ? '#ffffff' : '#1e40af',
+                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                             fontSize === 'text-2xl' ? '1.875rem' :
+                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem'
+                  }}
+                >
                   {translations.part1.title[language]}
-                </h2>
-                <p>{translations.part1.description[language]}</p>
-                <Link 
+                </Title>
+                <Text mb="lg">{translations.part1.description[language]}</Text>
+                <Button 
+                  component={Link} 
                   to="/questionnaire/pre" 
-                  className={`mt-6 block w-full text-center py-4 px-6 rounded-lg ${highContrast ? 'bg-white text-black hover:bg-gray-200' : 'bg-blue-700 text-white hover:bg-blue-800'} transition-colors font-bold`}
+                  fullWidth
+                  size="lg"
+                  variant={highContrast ? "filled" : "filled"}
+                  color={highContrast ? "gray" : "blue"}
+                  style={{
+                    backgroundColor: highContrast ? '#ffffff' : undefined,
+                    color: highContrast ? '#000000' : undefined,
+                  }}
                 >
                   {translations.part1.button[language]}
-                </Link>
-              </div>
+                </Button>
+              </Paper>
               
-              <div className={`part-card ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
-                <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
+              <Paper 
+                p="lg" 
+                radius="lg"
+                style={{
+                  backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
+                  border: highContrast ? '2px solid #ffffff' : undefined,
+                }}
+              >
+                <Title 
+                  order={2} 
+                  mb="md"
+                  style={{ 
+                    color: highContrast ? '#ffffff' : '#1e40af',
+                    fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                             fontSize === 'text-2xl' ? '1.875rem' :
+                             fontSize === 'text-3xl' ? '2.25rem' : '2.75rem'
+                  }}
+                >
                   {translations.part2.title[language]}
-                </h2>
-                <p>{translations.part2.description[language]}</p>
-                <Link 
+                </Title>
+                <Text mb="lg">{translations.part2.description[language]}</Text>
+                <Button 
+                  component={Link} 
                   to="/questionnaire/post" 
-                  className={`mt-6 block w-full text-center py-4 px-6 rounded-lg ${highContrast ? 'bg-white text-black hover:bg-gray-200' : 'bg-blue-700 text-white hover:bg-blue-800'} transition-colors font-bold`}
+                  fullWidth
+                  size="lg"
+                  variant={highContrast ? "filled" : "filled"}
+                  color={highContrast ? "gray" : "blue"}
+                  style={{
+                    backgroundColor: highContrast ? '#ffffff' : undefined,
+                    color: highContrast ? '#000000' : undefined,
+                  }}
                 >
                   {translations.part2.button[language]}
-                </Link>
-              </div>
-            </div>
-          </div>
+                </Button>
+              </Paper>
+            </Stack>
+          </Stack>
           
-          <div className="text-center mt-12">
-            <p className={`${fontSize} ${highContrast ? 'text-gray-300' : 'text-gray-600'}`}>
+          <Center mt="xl">
+            <Text 
+              c={highContrast ? "gray.3" : "gray.6"}
+              ta="center"
+            >
               {translations.selectPart[language]}
-            </p>
-          </div>
-        </div>
-      </div>
+            </Text>
+          </Center>
+        </Paper>
+      </Container>
     </div>
   );
 };

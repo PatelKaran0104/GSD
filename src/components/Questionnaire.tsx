@@ -4,6 +4,26 @@ import { useAppContext } from '../context/AppContext';
 import AccessibilityControls from './AccessibilityControls';
 import { preQuestions } from '../data/preQuestions';
 import { postQuestions } from '../data/postQuestions';
+import { 
+  Container, 
+  Paper, 
+  Title, 
+  Text, 
+  Button, 
+  Group, 
+  Stack, 
+  Radio, 
+  Checkbox, 
+  TextInput, 
+  Textarea, 
+  NumberInput,
+  Progress,
+  Alert,
+  Modal,
+  ActionIcon,
+  Flex,
+  Box
+} from '@mantine/core';
 import { ChevronLeft, ChevronRight, Save, Volume2, XCircle, Home } from 'lucide-react';
 
 const Questionnaire: React.FC = () => {
@@ -38,7 +58,6 @@ const Questionnaire: React.FC = () => {
 
   const currentQuestion = questions[currentStep];
 
-  // Check if current question should be displayed based on conditional logic
   const shouldDisplayQuestion = (question: any): boolean => {
     if (!question.conditionalDisplay) return true;
     
@@ -195,11 +214,9 @@ const Questionnaire: React.FC = () => {
         const endTime = new Date();
         const minutesTaken = Math.round((endTime.getTime() - startTime.getTime()) / 60000);
         
-        // Log completion time to console for research purposes
         console.log(`${part === 'pre' ? 'Pre-assessment' : 'Post-assessment'} questionnaire completed in ${minutesTaken} minutes`);
         console.log('Questionnaire data:', formData);
         
-        // Store completion time in form data for potential future use
         updateFormData(`${part}_completion_time`, minutesTaken.toString());
       }
       
@@ -228,152 +245,178 @@ const Questionnaire: React.FC = () => {
     switch (question.type) {
       case 'radio':
         return (
-          <div className="space-y-6">
-            {question.options?.map((option, idx) => (
-              <label 
-                key={idx} 
-                className={`option-card ${formData[question.id] === option.value ? 'selected' : ''} ${
-                  highContrast 
-                    ? formData[question.id] === option.value ? 'bg-blue-900 border-white' : 'bg-black border-white' 
-                    : formData[question.id] === option.value ? 'bg-blue-100 border-blue-500 shadow-lg' : 'bg-white border-gray-200 hover:border-blue-300'
-                }`}
-              >
-                <div className="flex items-start">
-                  <div className="flex items-center h-6 mt-1">
-                    <input
-                      type="radio"
-                      name={question.id}
-                      value={option.value}
-                      checked={formData[question.id] === option.value}
-                      onChange={() => handleInputChange(question.id, option.value)}
-                      className={`w-6 h-6 ${highContrast ? 'accent-white' : 'accent-blue-600'}`}
-                    />
-                  </div>
-                  <div className="ml-4">
-                    <span className={`${fontSize} font-medium`}>{option.label[language]}</span>
-                  </div>
-                </div>
-              </label>
-            ))}
-          </div>
+          <Radio.Group
+            value={formData[question.id] as string || ''}
+            onChange={(value) => handleInputChange(question.id, value)}
+          >
+            <Stack gap="md">
+              {question.options?.map((option, idx) => (
+                <Paper 
+                  key={idx}
+                  p="lg" 
+                  radius="md"
+                  style={{
+                    border: `2px solid ${formData[question.id] === option.value 
+                      ? (highContrast ? '#ffffff' : '#3b82f6') 
+                      : (highContrast ? '#ffffff' : '#e5e7eb')}`,
+                    backgroundColor: formData[question.id] === option.value 
+                      ? (highContrast ? '#1e3a8a' : '#dbeafe') 
+                      : (highContrast ? '#000000' : '#ffffff'),
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => handleInputChange(question.id, option.value)}
+                >
+                  <Radio 
+                    value={option.value} 
+                    label={option.label[language]}
+                    styles={{
+                      label: { 
+                        fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                                 fontSize === 'text-2xl' ? '1.5rem' :
+                                 fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                        fontWeight: 500,
+                        color: highContrast ? '#ffffff' : undefined
+                      }
+                    }}
+                  />
+                </Paper>
+              ))}
+            </Stack>
+          </Radio.Group>
         );
         
       case 'checkbox':
         return (
-          <div className="space-y-6">
-            {question.options?.map((option, idx) => {
-              const selectedValues = (formData[question.id] as string[]) || [];
-              const isChecked = selectedValues.includes(option.value);
-              
-              return (
-                <label 
-                  key={idx} 
-                  className={`option-card ${isChecked ? 'selected' : ''} ${
-                    highContrast 
-                      ? isChecked ? 'bg-blue-900 border-white' : 'bg-black border-white' 
-                      : isChecked ? 'bg-blue-100 border-blue-500' : 'bg-white border-gray-200 hover:border-blue-300'
-                  }`}
-                >
-                  <div className="flex items-start">
-                    <div className="flex items-center h-6 mt-1">
-                      <input
-                        type="checkbox"
-                        name={question.id}
-                        value={option.value}
-                        checked={isChecked}
-                        onChange={() => {
-                          const currentValues = [...(formData[question.id] as string[] || [])];
-                          const newValues = isChecked 
-                            ? currentValues.filter(v => v !== option.value)
-                            : [...currentValues, option.value];
-                          handleInputChange(question.id, newValues);
-                        }}
-                        className={`w-6 h-6 ${highContrast ? 'accent-white' : 'accent-blue-600'}`}
-                      />
-                    </div>
-                    <div className="ml-4">
-                      <span className={`${fontSize} font-medium`}>{option.label[language]}</span>
-                    </div>
-                  </div>
-                </label>
-              );
-            })}
-          </div>
+          <Checkbox.Group
+            value={(formData[question.id] as string[]) || []}
+            onChange={(value) => handleInputChange(question.id, value)}
+          >
+            <Stack gap="md">
+              {question.options?.map((option, idx) => {
+                const selectedValues = (formData[question.id] as string[]) || [];
+                const isChecked = selectedValues.includes(option.value);
+                
+                return (
+                  <Paper 
+                    key={idx}
+                    p="lg" 
+                    radius="md"
+                    style={{
+                      border: `2px solid ${isChecked 
+                        ? (highContrast ? '#ffffff' : '#3b82f6') 
+                        : (highContrast ? '#ffffff' : '#e5e7eb')}`,
+                      backgroundColor: isChecked 
+                        ? (highContrast ? '#1e3a8a' : '#dbeafe') 
+                        : (highContrast ? '#000000' : '#ffffff'),
+                      cursor: 'pointer',
+                    }}
+                    onClick={() => {
+                      const currentValues = [...(formData[question.id] as string[] || [])];
+                      const newValues = isChecked 
+                        ? currentValues.filter(v => v !== option.value)
+                        : [...currentValues, option.value];
+                      handleInputChange(question.id, newValues);
+                    }}
+                  >
+                    <Checkbox 
+                      value={option.value} 
+                      label={option.label[language]}
+                      styles={{
+                        label: { 
+                          fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                                   fontSize === 'text-2xl' ? '1.5rem' :
+                                   fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                          fontWeight: 500,
+                          color: highContrast ? '#ffffff' : undefined
+                        }
+                      }}
+                    />
+                  </Paper>
+                );
+              })}
+            </Stack>
+          </Checkbox.Group>
         );
         
       case 'scale':
         return (
-          <div className={`mt-8 ${highContrast ? 'text-white' : 'text-gray-800'}`}>
-            <div className="flex justify-between mb-2">
-              <span>{question.scaleStart?.[language]}</span>
-              <span>{question.scaleEnd?.[language]}</span>
-            </div>
-            <div className="grid grid-cols-5 gap-4">
+          <Box mt="lg">
+            <Group justify="space-between" mb="sm">
+              <Text size="sm">{question.scaleStart?.[language]}</Text>
+              <Text size="sm">{question.scaleEnd?.[language]}</Text>
+            </Group>
+            <div className="scale-button-grid">
               {[0, 1, 2, 3, 4].map((value) => (
-                <button
+                <Button
                   key={value}
                   onClick={() => handleInputChange(question.id, value.toString())}
-                  className={`scale-button ${formData[question.id] === value.toString() ? 'selected' : ''} ${fontSize} font-bold 
-                    ${formData[question.id] === value.toString() 
-                      ? highContrast 
-                        ? 'bg-white text-black' 
-                        : 'bg-blue-600 text-white' 
-                      : highContrast 
-                        ? 'bg-gray-800 text-white border-2 border-white hover:bg-gray-700' 
-                        : 'bg-white border-2 border-gray-300 hover:border-blue-300'
-                    }`}
+                  variant={formData[question.id] === value.toString() ? "filled" : "outline"}
+                  color={highContrast ? "gray" : "blue"}
+                  size="lg"
+                  style={{
+                    backgroundColor: formData[question.id] === value.toString() 
+                      ? (highContrast ? '#ffffff' : undefined)
+                      : (highContrast ? '#333333' : undefined),
+                    color: formData[question.id] === value.toString() 
+                      ? (highContrast ? '#000000' : undefined)
+                      : (highContrast ? '#ffffff' : undefined),
+                    borderColor: highContrast ? '#ffffff' : undefined,
+                    fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                             fontSize === 'text-2xl' ? '1.5rem' :
+                             fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                    fontWeight: 700,
+                  }}
                 >
                   {value}
-                </button>
+                </Button>
               ))}
             </div>
-            <div className="flex justify-between mt-2">
-              <span className={`${fontSize === 'text-xl' ? 'text-sm' : 'text-base'}`}>
-                {question.scaleLabels?.[language][0] || ''}
-              </span>
-              <span className={`${fontSize === 'text-xl' ? 'text-sm' : 'text-base'} text-center`}>
-                {question.scaleLabels?.[language][2] || ''}
-              </span>
-              <span className={`${fontSize === 'text-xl' ? 'text-sm' : 'text-base'} text-right`}>
-                {question.scaleLabels?.[language][4] || ''}
-              </span>
+            <div className="scale-labels">
+              <Text size="sm">{question.scaleLabels?.[language][0] || ''}</Text>
+              <Text size="sm">{question.scaleLabels?.[language][2] || ''}</Text>
+              <Text size="sm">{question.scaleLabels?.[language][4] || ''}</Text>
             </div>
-          </div>
+          </Box>
         );
         
       case 'text':
         return (
-          <div className="mt-6">
-            <textarea
-              value={formData[question.id] as string || ''}
-              onChange={(e) => handleInputChange(question.id, e.target.value)}
-              rows={5}
-              className={`w-full p-4 rounded-lg border-2 ${
-                highContrast 
-                  ? 'bg-black text-white border-white focus:border-blue-300' 
-                  : 'bg-white text-gray-900 border-gray-300 focus:border-blue-500'
-              } ${fontSize}`}
-              placeholder={question.placeholder || ''}
-            />
-          </div>
+          <Textarea
+            value={formData[question.id] as string || ''}
+            onChange={(e) => handleInputChange(question.id, e.target.value)}
+            rows={5}
+            placeholder={question.placeholder || ''}
+            styles={{
+              input: {
+                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                         fontSize === 'text-2xl' ? '1.5rem' :
+                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                backgroundColor: highContrast ? '#000000' : undefined,
+                color: highContrast ? '#ffffff' : undefined,
+                borderColor: highContrast ? '#ffffff' : undefined,
+              }
+            }}
+          />
         );
         
       case 'number':
         return (
-          <div className="mt-6">
-            <input
-              type="number"
-              value={formData[question.id] as string || ''}
-              onChange={(e) => handleInputChange(question.id, e.target.value)}
-              min={0}
-              className={`w-full p-4 rounded-lg border-2 ${
-                highContrast 
-                  ? 'bg-black text-white border-white focus:border-blue-300' 
-                  : 'bg-white text-gray-900 border-gray-300 focus:border-blue-500'
-              } ${fontSize}`}
-              placeholder={question.placeholder || ''}
-            />
-          </div>
+          <NumberInput
+            value={formData[question.id] as string || ''}
+            onChange={(value) => handleInputChange(question.id, value?.toString() || '')}
+            min={0}
+            placeholder={question.placeholder || ''}
+            styles={{
+              input: {
+                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
+                         fontSize === 'text-2xl' ? '1.5rem' :
+                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem',
+                backgroundColor: highContrast ? '#000000' : undefined,
+                color: highContrast ? '#ffffff' : undefined,
+                borderColor: highContrast ? '#ffffff' : undefined,
+              }
+            }}
+          />
         );
         
       default:
@@ -381,196 +424,234 @@ const Questionnaire: React.FC = () => {
     }
   };
 
-  // Calculate progress based on visible questions
   const visibleQuestions = questions.filter(shouldDisplayQuestion);
   const currentVisibleIndex = visibleQuestions.findIndex(q => q.id === currentQuestion.id);
   const progress = Math.round(((currentVisibleIndex + 1) / visibleQuestions.length) * 100);
+
+  const containerStyle = {
+    minHeight: '100vh',
+    backgroundColor: highContrast ? '#000000' : '#eff6ff',
+    color: highContrast ? '#ffffff' : '#1e3a8a',
+  };
   
   return (
-    <div className={`min-h-screen ${highContrast ? 'bg-black text-white' : 'bg-blue-50 text-blue-900'} transition-colors duration-300`}>
-      <div className="container py-8">
+    <div style={containerStyle} className={`${fontSize} ${highContrast ? 'high-contrast' : ''}`}>
+      <Container size="lg" py="xl">
         <AccessibilityControls />
         
-        {/* Home Confirmation Modal */}
-        {showHomeConfirm && (
-          <div className="modal-overlay">
-            <div className={`modal-content ${highContrast ? 'bg-black border-2 border-white' : 'bg-white'}`}>
-              <h3 className={`${fontSize} font-bold mb-4`}>
-                {language === 'de' 
-                  ? 'Zur Startseite zurückkehren?' 
-                  : 'Return to home page?'}
-              </h3>
-              <p className={`${fontSize} mb-6`}>
-                {language === 'de'
-                  ? 'Ihre bisherigen Antworten gehen verloren. Sind Sie sicher?'
-                  : 'Your current answers will be lost. Are you sure?'}
-              </p>
-              <div className="flex space-x-4">
-                <button
-                  onClick={confirmGoHome}
-                  className={`flex-1 py-3 px-4 rounded-lg ${
-                    highContrast 
-                      ? 'bg-white text-black hover:bg-gray-200' 
-                      : 'bg-red-600 text-white hover:bg-red-700'
-                  } transition-colors ${fontSize} font-medium`}
-                >
-                  {language === 'de' ? 'Ja, zurück' : 'Yes, go back'}
-                </button>
-                <button
-                  onClick={cancelGoHome}
-                  className={`flex-1 py-3 px-4 rounded-lg ${
-                    highContrast 
-                      ? 'bg-gray-800 text-white hover:bg-gray-700' 
-                      : 'bg-gray-300 text-gray-800 hover:bg-gray-400'
-                  } transition-colors ${fontSize} font-medium`}
-                >
-                  {language === 'de' ? 'Abbrechen' : 'Cancel'}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        <Modal
+          opened={showHomeConfirm}
+          onClose={cancelGoHome}
+          title={
+            <Text fw={700} size="lg">
+              {language === 'de' 
+                ? 'Zur Startseite zurückkehren?' 
+                : 'Return to home page?'}
+            </Text>
+          }
+          centered
+        >
+          <Stack gap="md">
+            <Text>
+              {language === 'de'
+                ? 'Ihre bisherigen Antworten gehen verloren. Sind Sie sicher?'
+                : 'Your current answers will be lost. Are you sure?'}
+            </Text>
+            <Group justify="flex-end" gap="sm">
+              <Button variant="outline" onClick={cancelGoHome}>
+                {language === 'de' ? 'Abbrechen' : 'Cancel'}
+              </Button>
+              <Button color="red" onClick={confirmGoHome}>
+                {language === 'de' ? 'Ja, zurück' : 'Yes, go back'}
+              </Button>
+            </Group>
+          </Stack>
+        </Modal>
         
-        <div className="max-w-3xl mx-auto mt-12">
-          {/* Progress bar */}
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-2">
-              <div className="flex items-center space-x-4">
-                <span className={`${fontSize} font-medium`}>
+        <Box mt="xl">
+          <div className="question-progress">
+            <Group justify="space-between" mb="sm">
+              <Group gap="md">
+                <Text fw={500}>
                   {language === 'de' 
                     ? `Frage ${currentVisibleIndex + 1} von ${visibleQuestions.length}`
                     : `Question ${currentVisibleIndex + 1} of ${visibleQuestions.length}`}
-                </span>
-                <button
+                </Text>
+                <ActionIcon
                   onClick={handleHomeClick}
-                  className={`p-2 rounded-full ${
-                    highContrast 
-                      ? 'bg-white text-black hover:bg-gray-200' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  } transition-colors`}
-                  aria-label={language === 'de' ? "Zur Startseite" : "Go to home"}
-                  title={language === 'de' ? "Zur Startseite" : "Go to home"}
+                  variant="light"
+                  color={highContrast ? "gray" : "gray"}
+                  size="md"
+                  className="home-button"
                 >
-                  <Home className="w-5 h-5" />
-                </button>
-              </div>
-              <span className={`${fontSize} font-medium`}>{progress}%</span>
-            </div>
-            <div className={`progress-bar ${highContrast ? 'bg-gray-800' : 'bg-gray-200'}`}>
-              <div 
-                className={`progress-bar-fill ${highContrast ? 'bg-white' : 'bg-blue-600'} transition-all duration-500 ease-out`}
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
+                  <Home size={20} />
+                </ActionIcon>
+              </Group>
+              <Text fw={500}>{progress}%</Text>
+            </Group>
+            <Progress 
+              value={progress} 
+              size="lg" 
+              radius="xl"
+              color={highContrast ? "gray" : "blue"}
+              styles={{
+                root: {
+                  backgroundColor: highContrast ? '#333333' : undefined,
+                },
+                bar: {
+                  backgroundColor: highContrast ? '#ffffff' : undefined,
+                }
+              }}
+            />
           </div>
           
-          {/* Section title */}
-          <div className={`${highContrast ? 'bg-blue-900 text-white border-white border-2' : 'bg-blue-700 text-white'} rounded-t-xl px-6 py-4`}>
-            <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold`}>
+          <Paper 
+            radius="lg" 
+            style={{
+              backgroundColor: highContrast ? '#1e3a8a' : '#1d4ed8',
+              color: '#ffffff',
+            }}
+            p="lg"
+          >
+            <Title 
+              order={2}
+              style={{ 
+                fontSize: fontSize === 'text-xl' ? '1.5rem' : 
+                         fontSize === 'text-2xl' ? '1.875rem' :
+                         fontSize === 'text-3xl' ? '2.25rem' : '2.75rem'
+              }}
+            >
               {part === 'pre' 
                 ? language === 'de' ? 'Teil 1: Vorerhebung' : 'Part 1: Pre-assessment'
                 : language === 'de' ? 'Teil 2: Erfolgskontrolle' : 'Part 2: Success evaluation'}
-            </h2>
-            <p className={`${fontSize === 'text-xl' ? 'text-lg' : fontSize}`}>
+            </Title>
+            <Text size="lg">
               {currentQuestion.section[language]}
-            </p>
-          </div>
+            </Text>
+          </Paper>
           
-          {/* Question content */}
-          <div className={`question-card ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'}`}>
-            <div className="mb-8">
-              <div className="flex items-start justify-between mb-6">
-                <h3 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold flex-1 mr-4`}>
-                  {currentQuestion.question[language]}
-                </h3>
-                <button
-                  onClick={isReading ? stopReading : readQuestion}
-                  className={`p-3 rounded-full flex-shrink-0 ${
-                    highContrast 
-                      ? 'bg-white text-black hover:bg-gray-200' 
-                      : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
-                  } transition-colors`}
-                  aria-label={isReading 
-                    ? language === 'de' ? "Vorlesen stoppen" : "Stop reading"
-                    : language === 'de' ? "Frage vorlesen" : "Read question"}
+          <Paper 
+            shadow="xl" 
+            radius="lg" 
+            p="xl" 
+            mt={0}
+            style={{
+              backgroundColor: highContrast ? '#000000' : undefined,
+              border: highContrast ? '2px solid #ffffff' : undefined,
+              color: highContrast ? '#ffffff' : undefined,
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+            }}
+          >
+            <Stack gap="lg">
+              <Flex justify="space-between" align="flex-start" gap="md">
+                <Title 
+                  order={3}
+                  style={{ 
+                    flex: 1,
+                    fontSize: fontSize === 'text-xl' ? '1.375rem' : 
+                             fontSize === 'text-2xl' ? '1.625rem' :
+                             fontSize === 'text-3xl' ? '2rem' : '2.5rem'
+                  }}
                 >
-                  <Volume2 className={`w-6 h-6 ${isReading ? 'animate-pulse' : ''}`} />
-                </button>
-              </div>
+                  {currentQuestion.question[language]}
+                </Title>
+                <ActionIcon
+                  onClick={isReading ? stopReading : readQuestion}
+                  variant={highContrast ? "filled" : "light"}
+                  color={highContrast ? "gray" : "blue"}
+                  size="lg"
+                  className="speech-button"
+                  style={{
+                    backgroundColor: highContrast ? '#ffffff' : undefined,
+                    color: highContrast ? '#000000' : undefined,
+                  }}
+                >
+                  <Volume2 size={24} className={isReading ? 'animate-pulse' : ''} />
+                </ActionIcon>
+              </Flex>
               
               {currentQuestion.description && (
-                <p className={`${fontSize} mb-6 ${highContrast ? 'text-gray-300' : 'text-gray-600'}`}>
+                <Text 
+                  c={highContrast ? "gray.3" : "gray.6"}
+                  size="lg"
+                >
                   {currentQuestion.description[language]}
-                </p>
+                </Text>
               )}
 
               {speechError && (
-                <div className={`error-message ${highContrast ? 'bg-red-900 text-white' : 'bg-red-100 text-red-800'}`}>
-                  <XCircle className="w-6 h-6 mr-2" />
-                  <span className={fontSize}>{speechError}</span>
-                </div>
+                <Alert 
+                  icon={<XCircle size={16} />} 
+                  color="red"
+                  variant={highContrast ? "filled" : "light"}
+                >
+                  {speechError}
+                </Alert>
               )}
 
               {showError && (
-                <div className={`error-message ${highContrast ? 'bg-red-900 text-white' : 'bg-red-100 text-red-800'}`}>
-                  <XCircle className="w-6 h-6 mr-2" />
-                  <span className={fontSize}>
-                    {language === 'de'
-                      ? 'Bitte wählen Sie eine Antwort aus, bevor Sie fortfahren.'
-                      : 'Please select an answer before continuing.'}
-                  </span>
-                </div>
+                <Alert 
+                  icon={<XCircle size={16} />} 
+                  color="red"
+                  variant={highContrast ? "filled" : "light"}
+                >
+                  {language === 'de'
+                    ? 'Bitte wählen Sie eine Antwort aus, bevor Sie fortfahren.'
+                    : 'Please select an answer before continuing.'}
+                </Alert>
               )}
               
               {renderQuestionContent()}
-            </div>
+            </Stack>
             
-            {/* Navigation buttons */}
-            <div className="flex justify-between mt-12">
-              <button
+            <Group justify="space-between" mt="xl">
+              <Button
                 onClick={handlePrevious}
-                className={`flex items-center py-4 px-6 rounded-lg ${
-                  highContrast 
-                    ? 'bg-white text-black hover:bg-gray-200' 
-                    : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-                } transition-colors ${fontSize} font-medium`}
+                variant={highContrast ? "filled" : "light"}
+                color={highContrast ? "gray" : "gray"}
+                size="lg"
+                leftSection={<ChevronLeft size={20} />}
+                style={{
+                  backgroundColor: highContrast ? '#ffffff' : undefined,
+                  color: highContrast ? '#000000' : undefined,
+                }}
               >
-                <ChevronLeft className="w-6 h-6 mr-2" />
                 {language === 'de' ? 'Zurück' : 'Back'}
-              </button>
+              </Button>
               
-              <button
+              <Button
                 onClick={handleNext}
-                className={`flex items-center py-4 px-6 rounded-lg ${
-                  highContrast 
-                    ? 'bg-white text-black hover:bg-gray-200' 
-                    : 'bg-blue-700 text-white hover:bg-blue-800'
-                } transition-colors ${fontSize} font-bold ${
+                size="lg"
+                variant={highContrast ? "filled" : "filled"}
+                color={highContrast ? "gray" : "blue"}
+                disabled={
                   currentQuestion.required && 
                   (formData[currentQuestion.id] === undefined || 
                    formData[currentQuestion.id] === null || 
                    (Array.isArray(formData[currentQuestion.id]) && (formData[currentQuestion.id] as string[]).length === 0) ||
                    formData[currentQuestion.id] === '')
-                    ? 'opacity-50 cursor-not-allowed'
-                    : ''
-                }`}
+                }
+                rightSection={
+                  currentVisibleIndex === visibleQuestions.length - 1 ? 
+                    <Save size={20} /> : 
+                    <ChevronRight size={20} />
+                }
+                style={{
+                  backgroundColor: highContrast ? '#ffffff' : undefined,
+                  color: highContrast ? '#000000' : undefined,
+                }}
               >
                 {currentVisibleIndex === visibleQuestions.length - 1 ? (
-                  <>
-                    <Save className="w-6 h-6 mr-2" />
-                    {language === 'de' ? 'Abschließen' : 'Complete'}
-                  </>
+                  language === 'de' ? 'Abschließen' : 'Complete'
                 ) : (
-                  <>
-                    {language === 'de' ? 'Weiter' : 'Next'}
-                    <ChevronRight className="w-6 h-6 ml-2" />
-                  </>
+                  language === 'de' ? 'Weiter' : 'Next'
                 )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Button>
+            </Group>
+          </Paper>
+        </Box>
+      </Container>
     </div>
   );
 };

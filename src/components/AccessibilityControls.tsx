@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
+import { Paper, ActionIcon, Group, Tooltip } from '@mantine/core';
 import { ZoomIn, ZoomOut, Sun, Languages } from 'lucide-react';
 
 const AccessibilityControls: React.FC = () => {
@@ -14,68 +15,63 @@ const AccessibilityControls: React.FC = () => {
   } = useAppContext();
 
   return (
-    <div className={`accessibility-controls ${highContrast ? 'bg-blue-900 text-white' : 'bg-white'}`}>
-      <div className="flex items-center space-x-4">
-        <button
-          onClick={decreaseFontSize}
-          className={`p-2 rounded-full ${fontSize === 'text-xl' ? 'opacity-50 cursor-not-allowed' : ''} ${
-            highContrast 
-              ? 'bg-white text-black hover:bg-gray-200 focus:ring-white' 
-              : 'bg-blue-100 text-blue-800 hover:bg-blue-200 focus:ring-blue-300'
-          } focus:outline-none focus:ring-2`}
-          disabled={fontSize === 'text-xl'}
-          aria-label={language === 'de' ? "Schriftgröße verkleinern" : "Decrease font size"}
-        >
-          <ZoomOut className="w-6 h-6" />
-        </button>
-        <button
-          onClick={increaseFontSize}
-          className={`p-2 rounded-full ${fontSize === 'text-4xl' ? 'opacity-50 cursor-not-allowed' : ''} ${
-            highContrast 
-              ? 'bg-white text-black hover:bg-gray-200 focus:ring-white' 
-              : 'bg-blue-100 text-blue-800 hover:bg-blue-200 focus:ring-blue-300'
-          } focus:outline-none focus:ring-2`}
-          disabled={fontSize === 'text-4xl'}
-          aria-label={language === 'de' ? "Schriftgröße vergrößern" : "Increase font size"}
-        >
-          <ZoomIn className="w-6 h-6" />
-        </button>
-        <button
-          onClick={toggleHighContrast}
-          className={`p-2 rounded-full ${
-            highContrast 
-              ? 'bg-white text-black hover:bg-gray-200 focus:ring-white' 
-              : 'bg-blue-100 text-blue-800 hover:bg-blue-200 focus:ring-blue-300'
-          } focus:outline-none focus:ring-2`}
-          aria-label={language === 'de' ? "Kontrast umschalten" : "Toggle contrast"}
-        >
-          <Sun className="w-6 h-6" />
-        </button>
-        <div className="relative">
-          <button
-            onClick={toggleLanguage}
-            className={`p-2 rounded-full ${
-              highContrast 
-                ? 'bg-white text-black hover:bg-gray-200 focus:ring-white' 
-                : 'bg-blue-100 text-blue-800 hover:bg-blue-200 focus:ring-blue-300'
-            } focus:outline-none focus:ring-2 transition-colors duration-200`}
-            aria-label={language === 'de' ? "Sprache ändern zu Englisch" : "Change language to German"}
+    <Paper 
+      className="accessibility-controls" 
+      shadow="md" 
+      p="md"
+      style={{
+        backgroundColor: highContrast ? '#1e3a8a' : undefined,
+        color: highContrast ? 'white' : undefined,
+      }}
+    >
+      <Group gap="sm">
+        <Tooltip label={language === 'de' ? "Schriftgröße verkleinern" : "Decrease font size"}>
+          <ActionIcon
+            onClick={decreaseFontSize}
+            disabled={fontSize === 'text-xl'}
+            variant={highContrast ? "filled" : "light"}
+            color={highContrast ? "gray" : "blue"}
+            size="lg"
           >
-            <Languages className="w-6 h-6" />
-            <span className="sr-only">{language === 'de' ? 'Deutsch' : 'English'}</span>
-          </button>
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 pointer-events-none">
-            <span className={`text-sm font-medium px-2 py-1 rounded ${
-              highContrast 
-                ? 'bg-white text-black' 
-                : 'bg-gray-900 text-white'
-            }`}>
-              {language === 'de' ? 'EN' : 'DE'}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+            <ZoomOut size={20} />
+          </ActionIcon>
+        </Tooltip>
+
+        <Tooltip label={language === 'de' ? "Schriftgröße vergrößern" : "Increase font size"}>
+          <ActionIcon
+            onClick={increaseFontSize}
+            disabled={fontSize === 'text-4xl'}
+            variant={highContrast ? "filled" : "light"}
+            color={highContrast ? "gray" : "blue"}
+            size="lg"
+          >
+            <ZoomIn size={20} />
+          </ActionIcon>
+        </Tooltip>
+
+        <Tooltip label={language === 'de' ? "Kontrast umschalten" : "Toggle contrast"}>
+          <ActionIcon
+            onClick={toggleHighContrast}
+            variant={highContrast ? "filled" : "light"}
+            color={highContrast ? "gray" : "blue"}
+            size="lg"
+          >
+            <Sun size={20} />
+          </ActionIcon>
+        </Tooltip>
+
+        <Tooltip label={language === 'de' ? "Sprache ändern zu Englisch" : "Change language to German"}>
+          <ActionIcon
+            onClick={toggleLanguage}
+            variant={highContrast ? "filled" : "light"}
+            color={highContrast ? "gray" : "blue"}
+            size="lg"
+          >
+            <Languages size={20} />
+          </ActionIcon>
+        </Tooltip>
+      </Group>
+    </Paper>
   );
 };
 
