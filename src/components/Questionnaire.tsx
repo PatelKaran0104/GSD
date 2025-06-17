@@ -475,10 +475,20 @@ const Questionnaire: React.FC = () => {
         </Modal>
         
         <Box mt="xl">
-          <div className="question-progress">
-            <Group justify="space-between" mb="sm">
+          {/* Progress Section - Now at the top */}
+          <Paper 
+            radius="lg" 
+            p="lg"
+            mb="lg"
+            style={{
+              backgroundColor: highContrast ? '#000000' : '#ffffff',
+              border: highContrast ? '2px solid #ffffff' : undefined,
+              color: highContrast ? '#ffffff' : undefined,
+            }}
+          >
+            <Group justify="space-between" align="center" mb="md">
               <Group gap="md">
-                <Text fw={500}>
+                <Text fw={600} size="lg">
                   {language === 'de' 
                     ? `Frage ${currentVisibleIndex + 1} von ${visibleQuestions.length}`
                     : `Question ${currentVisibleIndex + 1} of ${visibleQuestions.length}`}
@@ -496,7 +506,7 @@ const Questionnaire: React.FC = () => {
                   <Home size={20} />
                 </ActionIcon>
               </Group>
-              <Text fw={500}>{progress}%</Text>
+              <Text fw={600} size="lg">{progress}%</Text>
             </Group>
             <Progress 
               value={progress} 
@@ -512,8 +522,9 @@ const Questionnaire: React.FC = () => {
                 }
               }}
             />
-          </div>
+          </Paper>
           
+          {/* Section Header */}
           <Paper 
             radius="lg" 
             style={{
@@ -539,6 +550,7 @@ const Questionnaire: React.FC = () => {
             </Text>
           </Paper>
           
+          {/* Question Content */}
           <Paper 
             shadow="xl" 
             radius="lg" 
