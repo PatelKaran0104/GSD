@@ -97,6 +97,63 @@
   padding: 24px !important;
 }
 
+/* Perfect alignment for radio and checkbox inputs */
+.mantine-Radio-root {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.mantine-Radio-body {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+.mantine-Radio-radio {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+.mantine-Radio-label {
+  margin: 0 !important;
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.mantine-Checkbox-root {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.mantine-Checkbox-body {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+
+.mantine-Checkbox-input {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+.mantine-Checkbox-label {
+  margin: 0 !important;
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
 /* Scale buttons - bigger and more spacious */
 .scale-button-grid button {
   min-height: 80px !important;
