@@ -17,57 +17,90 @@ const AccessibilityControls: React.FC = () => {
   return (
     <Paper 
       className="accessibility-controls" 
-      shadow="md" 
-      p="md"
+      shadow="lg" 
+      p="lg"
+      radius="xl"
       style={{
-        backgroundColor: highContrast ? '#1e3a8a' : undefined,
-        color: highContrast ? 'white' : undefined,
+        backgroundColor: highContrast ? '#4b5563' : '#ffffff',
+        border: highContrast ? '2px solid #d1d5db' : '1px solid #e5e7eb',
       }}
     >
-      <Group gap="sm">
-        <Tooltip label={language === 'de' ? "Schriftgröße verkleinern" : "Decrease font size"}>
+      <Group gap="md">
+        <Tooltip 
+          label={language === 'de' ? "Schriftgröße verkleinern" : "Decrease font size"}
+          position="bottom"
+        >
           <ActionIcon
             onClick={decreaseFontSize}
             disabled={fontSize === 'text-xl'}
-            variant={highContrast ? "filled" : "light"}
-            color={highContrast ? "gray" : "blue"}
-            size="lg"
+            variant="light"
+            color="blue"
+            size="xl"
+            radius="lg"
+            style={{
+              backgroundColor: highContrast ? '#374151' : '#dbeafe',
+              color: highContrast ? '#f9fafb' : '#1d4ed8',
+            }}
           >
-            <ZoomOut size={20} />
+            <ZoomOut size={24} />
           </ActionIcon>
         </Tooltip>
 
-        <Tooltip label={language === 'de' ? "Schriftgröße vergrößern" : "Increase font size"}>
+        <Tooltip 
+          label={language === 'de' ? "Schriftgröße vergrößern" : "Increase font size"}
+          position="bottom"
+        >
           <ActionIcon
             onClick={increaseFontSize}
             disabled={fontSize === 'text-4xl'}
-            variant={highContrast ? "filled" : "light"}
-            color={highContrast ? "gray" : "blue"}
-            size="lg"
+            variant="light"
+            color="blue"
+            size="xl"
+            radius="lg"
+            style={{
+              backgroundColor: highContrast ? '#374151' : '#dbeafe',
+              color: highContrast ? '#f9fafb' : '#1d4ed8',
+            }}
           >
-            <ZoomIn size={20} />
+            <ZoomIn size={24} />
           </ActionIcon>
         </Tooltip>
 
-        <Tooltip label={language === 'de' ? "Kontrast umschalten" : "Toggle contrast"}>
+        <Tooltip 
+          label={language === 'de' ? "Kontrast umschalten" : "Toggle contrast"}
+          position="bottom"
+        >
           <ActionIcon
             onClick={toggleHighContrast}
-            variant={highContrast ? "filled" : "light"}
-            color={highContrast ? "gray" : "blue"}
-            size="lg"
+            variant="light"
+            color="blue"
+            size="xl"
+            radius="lg"
+            style={{
+              backgroundColor: highContrast ? '#374151' : '#dbeafe',
+              color: highContrast ? '#f9fafb' : '#1d4ed8',
+            }}
           >
-            <Sun size={20} />
+            <Sun size={24} />
           </ActionIcon>
         </Tooltip>
 
-        <Tooltip label={language === 'de' ? "Sprache ändern zu Englisch" : "Change language to German"}>
+        <Tooltip 
+          label={language === 'de' ? "Sprache ändern zu Englisch" : "Change language to German"}
+          position="bottom"
+        >
           <ActionIcon
             onClick={toggleLanguage}
-            variant={highContrast ? "filled" : "light"}
-            color={highContrast ? "gray" : "blue"}
-            size="lg"
+            variant="light"
+            color="blue"
+            size="xl"
+            radius="lg"
+            style={{
+              backgroundColor: highContrast ? '#374151' : '#dbeafe',
+              color: highContrast ? '#f9fafb' : '#1d4ed8',
+            }}
           >
-            <Languages size={20} />
+            <Languages size={24} />
           </ActionIcon>
         </Tooltip>
       </Group>

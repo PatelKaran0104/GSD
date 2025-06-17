@@ -47,14 +47,8 @@ const ThankYou: React.FC = () => {
     }
   };
 
-  const containerStyle = {
-    minHeight: '100vh',
-    backgroundColor: highContrast ? '#000000' : '#eff6ff',
-    color: highContrast ? '#ffffff' : '#1e3a8a',
-  };
-
   return (
-    <div style={containerStyle} className={`${fontSize} ${highContrast ? 'high-contrast' : ''}`}>
+    <div className={`thankyou-container ${fontSize} ${highContrast ? 'dark-mode' : ''}`}>
       <Container size="lg" py="xl">
         <AccessibilityControls />
         
@@ -64,13 +58,16 @@ const ThankYou: React.FC = () => {
           p="xl"
           mt="xl"
           style={{
-            backgroundColor: highContrast ? '#000000' : undefined,
-            border: highContrast ? '2px solid #ffffff' : undefined,
-            color: highContrast ? '#ffffff' : undefined,
+            backgroundColor: highContrast ? '#374151' : '#ffffff',
+            border: highContrast ? '2px solid #d1d5db' : '1px solid #e5e7eb',
           }}
         >
           <Center mb="xl">
-            <CheckCircle size={96} color={highContrast ? '#ffffff' : '#16a34a'} />
+            <CheckCircle 
+              size={120} 
+              color={highContrast ? '#f9fafb' : '#16a34a'} 
+              strokeWidth={1.5}
+            />
           </Center>
           
           <Title 
@@ -78,74 +75,119 @@ const ThankYou: React.FC = () => {
             ta="center" 
             mb="xl"
             style={{ 
-              color: highContrast ? '#ffffff' : '#1e3a8a',
-              fontSize: fontSize === 'text-xl' ? '2.5rem' : 
-                       fontSize === 'text-2xl' ? '3rem' :
-                       fontSize === 'text-3xl' ? '3.5rem' : '4rem'
+              color: highContrast ? '#f9fafb' : '#1e3a8a',
+              fontWeight: 700,
+              letterSpacing: '-0.025em'
             }}
           >
             {translations.title[language]}
           </Title>
           
-          <Stack gap="lg" mb="xl" ta="center">
-            <Text size="lg" fw={600}>{translations.submitted[language]}</Text>
-            <Text size="lg">{translations.thanks[language]}</Text>
+          <Stack gap="xl" mb="xl" ta="center">
+            <Text 
+              size="xl" 
+              fw={600}
+              style={{ 
+                lineHeight: 1.6,
+                color: highContrast ? '#f9fafb' : '#1f2937'
+              }}
+            >
+              {translations.submitted[language]}
+            </Text>
+            <Text 
+              size="lg"
+              style={{ 
+                lineHeight: 1.7,
+                color: highContrast ? '#e5e7eb' : '#374151'
+              }}
+            >
+              {translations.thanks[language]}
+            </Text>
             <Text 
               size="lg" 
-              c={highContrast ? "gray.3" : "gray.6"}
+              style={{ 
+                lineHeight: 1.7,
+                color: highContrast ? '#d1d5db' : '#6b7280',
+                fontStyle: 'italic'
+              }}
             >
               {translations.dataInfo[language]}
             </Text>
           </Stack>
 
           <Paper 
-            p="lg" 
-            radius="lg" 
+            p="xl" 
+            radius="xl" 
             mb="xl"
+            className="info-section"
             style={{
-              backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
-              border: highContrast ? '2px solid #ffffff' : undefined,
+              backgroundColor: highContrast ? '#4b5563' : '#eff6ff',
+              border: highContrast ? '2px solid #d1d5db' : '2px solid #dbeafe',
             }}
           >
             <Title 
               order={2} 
-              mb="md"
+              mb="lg"
               style={{ 
-                color: highContrast ? '#ffffff' : '#1e40af',
-                fontSize: fontSize === 'text-xl' ? '1.25rem' : 
-                         fontSize === 'text-2xl' ? '1.5rem' :
-                         fontSize === 'text-3xl' ? '1.875rem' : '2.25rem'
+                color: highContrast ? '#f9fafb' : '#1e40af',
+                fontWeight: 600
               }}
             >
               {translations.nextSteps[language]}
             </Title>
             <List 
-              spacing="sm"
-              style={{ color: highContrast ? '#cccccc' : '#374151' }}
+              spacing="lg"
+              styles={{
+                itemWrapper: {
+                  alignItems: 'flex-start'
+                },
+                itemIcon: {
+                  marginTop: '0.25rem'
+                }
+              }}
             >
               <List.Item 
-                icon={<BarChart3 size={20} />}
+                icon={<BarChart3 size={24} color={highContrast ? '#f9fafb' : '#1e40af'} />}
               >
-                {translations.doctorInfo[language]}
+                <Text 
+                  size="lg"
+                  style={{ 
+                    lineHeight: 1.6,
+                    color: highContrast ? '#e5e7eb' : '#374151'
+                  }}
+                >
+                  {translations.doctorInfo[language]}
+                </Text>
               </List.Item>
               <List.Item 
-                icon={<FileText size={20} />}
+                icon={<FileText size={24} color={highContrast ? '#f9fafb' : '#1e40af'} />}
               >
-                {translations.followUp[language]}
+                <Text 
+                  size="lg"
+                  style={{ 
+                    lineHeight: 1.6,
+                    color: highContrast ? '#e5e7eb' : '#374151'
+                  }}
+                >
+                  {translations.followUp[language]}
+                </Text>
               </List.Item>
             </List>
           </Paper>
           
-          <Group justify="center" gap="md">
+          <Group justify="center" gap="lg">
             <Button 
               component={Link} 
               to="/" 
-              size="lg"
-              variant={highContrast ? "filled" : "filled"}
-              color={highContrast ? "gray" : "blue"}
+              size="xl"
+              variant="filled"
+              color="blue"
               style={{
-                backgroundColor: highContrast ? '#ffffff' : undefined,
-                color: highContrast ? '#000000' : undefined,
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                padding: '1rem 2rem',
+                backgroundColor: highContrast ? '#f9fafb' : '#2563eb',
+                color: highContrast ? '#1f2937' : '#ffffff',
               }}
             >
               {translations.backToHome[language]}
@@ -154,12 +196,16 @@ const ThankYou: React.FC = () => {
             <Button 
               component={Link} 
               to="/" 
-              size="lg"
-              variant={highContrast ? "outline" : "outline"}
-              color={highContrast ? "gray" : "blue"}
+              size="xl"
+              variant="outline"
+              color="blue"
               style={{
-                borderColor: highContrast ? '#ffffff' : undefined,
-                color: highContrast ? '#ffffff' : undefined,
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                padding: '1rem 2rem',
+                borderColor: highContrast ? '#f9fafb' : '#2563eb',
+                color: highContrast ? '#f9fafb' : '#2563eb',
+                borderWidth: '2px',
               }}
             >
               {translations.newQuestionnaire[language]}
