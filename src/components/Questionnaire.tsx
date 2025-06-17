@@ -232,14 +232,14 @@ const Questionnaire: React.FC = () => {
             {question.options?.map((option, idx) => (
               <label 
                 key={idx} 
-                className={`block p-6 rounded-lg border-2 transition-all ${
+                className={`option-card ${formData[question.id] === option.value ? 'selected' : ''} ${
                   highContrast 
                     ? formData[question.id] === option.value ? 'bg-blue-900 border-white' : 'bg-black border-white' 
                     : formData[question.id] === option.value ? 'bg-blue-100 border-blue-500 shadow-lg' : 'bg-white border-gray-200 hover:border-blue-300'
-                } cursor-pointer`}
+                }`}
               >
                 <div className="flex items-start">
-                  <div className={`flex items-center h-6 mt-1`}>
+                  <div className="flex items-center h-6 mt-1">
                     <input
                       type="radio"
                       name={question.id}
@@ -268,14 +268,14 @@ const Questionnaire: React.FC = () => {
               return (
                 <label 
                   key={idx} 
-                  className={`block p-6 rounded-lg border-2 ${
+                  className={`option-card ${isChecked ? 'selected' : ''} ${
                     highContrast 
                       ? isChecked ? 'bg-blue-900 border-white' : 'bg-black border-white' 
                       : isChecked ? 'bg-blue-100 border-blue-500' : 'bg-white border-gray-200 hover:border-blue-300'
-                  } transition-colors cursor-pointer`}
+                  }`}
                 >
                   <div className="flex items-start">
-                    <div className={`flex items-center h-6 mt-1`}>
+                    <div className="flex items-center h-6 mt-1">
                       <input
                         type="checkbox"
                         name={question.id}
@@ -308,12 +308,12 @@ const Questionnaire: React.FC = () => {
               <span>{question.scaleStart?.[language]}</span>
               <span>{question.scaleEnd?.[language]}</span>
             </div>
-            <div className={`grid grid-cols-5 gap-4`}>
+            <div className="grid grid-cols-5 gap-4">
               {[0, 1, 2, 3, 4].map((value) => (
                 <button
                   key={value}
                   onClick={() => handleInputChange(question.id, value.toString())}
-                  className={`py-4 rounded-lg text-center ${fontSize} font-bold 
+                  className={`scale-button ${formData[question.id] === value.toString() ? 'selected' : ''} ${fontSize} font-bold 
                     ${formData[question.id] === value.toString() 
                       ? highContrast 
                         ? 'bg-white text-black' 
@@ -321,8 +321,7 @@ const Questionnaire: React.FC = () => {
                       : highContrast 
                         ? 'bg-gray-800 text-white border-2 border-white hover:bg-gray-700' 
                         : 'bg-white border-2 border-gray-300 hover:border-blue-300'
-                    }
-                  `}
+                    }`}
                 >
                   {value}
                 </button>
@@ -389,13 +388,13 @@ const Questionnaire: React.FC = () => {
   
   return (
     <div className={`min-h-screen ${highContrast ? 'bg-black text-white' : 'bg-blue-50 text-blue-900'} transition-colors duration-300`}>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container py-8">
         <AccessibilityControls />
         
         {/* Home Confirmation Modal */}
         {showHomeConfirm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className={`${highContrast ? 'bg-black border-2 border-white' : 'bg-white'} rounded-xl p-8 max-w-md mx-4`}>
+          <div className="modal-overlay">
+            <div className={`modal-content ${highContrast ? 'bg-black border-2 border-white' : 'bg-white'}`}>
               <h3 className={`${fontSize} font-bold mb-4`}>
                 {language === 'de' 
                   ? 'Zur Startseite zurückkehren?' 
@@ -457,9 +456,9 @@ const Questionnaire: React.FC = () => {
               </div>
               <span className={`${fontSize} font-medium`}>{progress}%</span>
             </div>
-            <div className={`w-full h-4 rounded-full ${highContrast ? 'bg-gray-800' : 'bg-gray-200'}`}>
+            <div className={`progress-bar ${highContrast ? 'bg-gray-800' : 'bg-gray-200'}`}>
               <div 
-                className={`h-4 rounded-full ${highContrast ? 'bg-white' : 'bg-blue-600'} transition-all duration-500 ease-out`}
+                className={`progress-bar-fill ${highContrast ? 'bg-white' : 'bg-blue-600'} transition-all duration-500 ease-out`}
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
@@ -478,7 +477,7 @@ const Questionnaire: React.FC = () => {
           </div>
           
           {/* Question content */}
-          <div className={`${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'} rounded-b-xl p-8 md:p-10 mb-8`}>
+          <div className={`question-card ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'}`}>
             <div className="mb-8">
               <div className="flex items-start justify-between mb-6">
                 <h3 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold flex-1 mr-4`}>
@@ -506,14 +505,14 @@ const Questionnaire: React.FC = () => {
               )}
 
               {speechError && (
-                <div className={`p-4 mb-6 rounded-lg ${highContrast ? 'bg-red-900 text-white' : 'bg-red-100 text-red-800'} flex items-center`}>
+                <div className={`error-message ${highContrast ? 'bg-red-900 text-white' : 'bg-red-100 text-red-800'}`}>
                   <XCircle className="w-6 h-6 mr-2" />
                   <span className={fontSize}>{speechError}</span>
                 </div>
               )}
 
               {showError && (
-                <div className={`p-4 mb-6 rounded-lg ${highContrast ? 'bg-red-900 text-white' : 'bg-red-100 text-red-800'} flex items-center`}>
+                <div className={`error-message ${highContrast ? 'bg-red-900 text-white' : 'bg-red-100 text-red-800'}`}>
                   <XCircle className="w-6 h-6 mr-2" />
                   <span className={fontSize}>
                     {language === 'de'

@@ -60,10 +60,10 @@ const Welcome: React.FC = () => {
 
   return (
     <div className={`min-h-screen ${highContrast ? 'bg-black text-white' : 'bg-blue-50 text-blue-900'} transition-colors duration-300`}>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container py-8">
         <AccessibilityControls />
         
-        <div className={`mt-12 max-w-3xl mx-auto ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'} rounded-2xl p-8 md:p-12`}>
+        <div className={`welcome-container ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'}`}>
           <div className="flex justify-center mb-6">
             <Stethoscope className={`w-16 h-16 ${highContrast ? 'text-white' : 'text-blue-700'}`} />
           </div>
@@ -77,7 +77,7 @@ const Welcome: React.FC = () => {
             <p className="mb-6">{translations.parts[language]}</p>
             
             <div className="space-y-6">
-              <div className={`p-6 rounded-xl ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
+              <div className={`part-card ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
                 <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
                   {translations.part1.title[language]}
                 </h2>
@@ -90,7 +90,7 @@ const Welcome: React.FC = () => {
                 </Link>
               </div>
               
-              <div className={`p-6 rounded-xl ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
+              <div className={`part-card ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
                 <h2 className={`${fontSize === 'text-xl' ? 'text-2xl' : fontSize === 'text-2xl' ? 'text-3xl' : fontSize === 'text-3xl' ? 'text-4xl' : 'text-5xl'} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
                   {translations.part2.title[language]}
                 </h2>

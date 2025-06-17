@@ -48,10 +48,10 @@ const ThankYou: React.FC = () => {
 
   return (
     <div className={`min-h-screen ${highContrast ? 'bg-black text-white' : 'bg-blue-50 text-blue-900'} transition-colors duration-300`}>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container py-8">
         <AccessibilityControls />
         
-        <div className={`mt-12 max-w-4xl mx-auto ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'} rounded-2xl p-8 md:p-12`}>
+        <div className={`thank-you-container ${highContrast ? 'bg-black border-2 border-white' : 'bg-white shadow-xl'}`}>
           <div className="flex justify-center mb-6">
             <CheckCircle className={`w-24 h-24 ${highContrast ? 'text-white' : 'text-green-600'}`} />
           </div>
@@ -69,7 +69,7 @@ const ThankYou: React.FC = () => {
           </div>
 
           {/* Next Steps Section */}
-          <div className={`${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'} rounded-xl p-6 mb-8`}>
+          <div className={`next-steps-card ${highContrast ? 'bg-blue-900 border-2 border-white' : 'bg-blue-50'}`}>
             <h2 className={`${fontSize} font-bold mb-4 ${highContrast ? 'text-white' : 'text-blue-800'}`}>
               {translations.nextSteps[language]}
             </h2>

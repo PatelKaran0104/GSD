@@ -14,7 +14,7 @@ const AccessibilityControls: React.FC = () => {
   } = useAppContext();
 
   return (
-    <div className={`fixed top-0 right-0 p-4 z-10 rounded-bl-lg ${highContrast ? 'bg-blue-900 text-white' : 'bg-white shadow-md'}`}>
+    <div className={`accessibility-controls ${highContrast ? 'bg-blue-900 text-white' : 'bg-white'}`}>
       <div className="flex items-center space-x-4">
         <button
           onClick={decreaseFontSize}
@@ -51,7 +51,7 @@ const AccessibilityControls: React.FC = () => {
         >
           <Sun className="w-6 h-6" />
         </button>
-        <div className="relative group">
+        <div className="relative">
           <button
             onClick={toggleLanguage}
             className={`p-2 rounded-full ${
@@ -64,7 +64,7 @@ const AccessibilityControls: React.FC = () => {
             <Languages className="w-6 h-6" />
             <span className="sr-only">{language === 'de' ? 'Deutsch' : 'English'}</span>
           </button>
-          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 pointer-events-none">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 pointer-events-none">
             <span className={`text-sm font-medium px-2 py-1 rounded ${
               highContrast 
                 ? 'bg-white text-black' 
