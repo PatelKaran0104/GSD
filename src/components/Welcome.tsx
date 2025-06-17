@@ -75,6 +75,7 @@ const Welcome: React.FC = () => {
           radius="xl" 
           p="xl"
           mt="xl"
+          className="main-container"
           style={{
             backgroundColor: highContrast ? '#000000' : undefined,
             border: highContrast ? '2px solid #ffffff' : undefined,
@@ -106,7 +107,7 @@ const Welcome: React.FC = () => {
             <Stack gap="lg">
               <Paper 
                 p="lg" 
-                radius="lg"
+                radius="xl"
                 style={{
                   backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
                   border: highContrast ? '2px solid #ffffff' : undefined,
@@ -130,6 +131,7 @@ const Welcome: React.FC = () => {
                   to="/questionnaire/pre" 
                   fullWidth
                   size="lg"
+                  radius="lg"
                   variant={highContrast ? "filled" : "filled"}
                   color={highContrast ? "gray" : "blue"}
                   style={{
@@ -143,7 +145,7 @@ const Welcome: React.FC = () => {
               
               <Paper 
                 p="lg" 
-                radius="lg"
+                radius="xl"
                 style={{
                   backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
                   border: highContrast ? '2px solid #ffffff' : undefined,
@@ -167,6 +169,7 @@ const Welcome: React.FC = () => {
                   to="/questionnaire/post" 
                   fullWidth
                   size="lg"
+                  radius="lg"
                   variant={highContrast ? "filled" : "filled"}
                   color={highContrast ? "gray" : "blue"}
                   style={{

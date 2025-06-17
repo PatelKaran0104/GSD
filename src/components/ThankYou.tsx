@@ -63,6 +63,7 @@ const ThankYou: React.FC = () => {
           radius="xl" 
           p="xl"
           mt="xl"
+          className="main-container"
           style={{
             backgroundColor: highContrast ? '#000000' : undefined,
             border: highContrast ? '2px solid #ffffff' : undefined,
@@ -100,7 +101,7 @@ const ThankYou: React.FC = () => {
 
           <Paper 
             p="lg" 
-            radius="lg" 
+            radius="xl" 
             mb="xl"
             style={{
               backgroundColor: highContrast ? '#1e3a8a' : '#eff6ff',
@@ -141,6 +142,7 @@ const ThankYou: React.FC = () => {
               component={Link} 
               to="/" 
               size="lg"
+              radius="lg"
               variant={highContrast ? "filled" : "filled"}
               color={highContrast ? "gray" : "blue"}
               style={{
@@ -155,6 +157,7 @@ const ThankYou: React.FC = () => {
               component={Link} 
               to="/" 
               size="lg"
+              radius="lg"
               variant={highContrast ? "outline" : "outline"}
               color={highContrast ? "gray" : "blue"}
               style={{

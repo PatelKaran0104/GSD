@@ -254,7 +254,8 @@ const Questionnaire: React.FC = () => {
                 <Paper 
                   key={idx}
                   p="lg" 
-                  radius="md"
+                  radius="lg"
+                  className="radio-option-paper"
                   style={{
                     border: `2px solid ${formData[question.id] === option.value 
                       ? (highContrast ? '#ffffff' : '#3b82f6') 
@@ -300,7 +301,8 @@ const Questionnaire: React.FC = () => {
                   <Paper 
                     key={idx}
                     p="lg" 
-                    radius="md"
+                    radius="lg"
+                    className="checkbox-option-paper"
                     style={{
                       border: `2px solid ${isChecked 
                         ? (highContrast ? '#ffffff' : '#3b82f6') 
@@ -353,6 +355,7 @@ const Questionnaire: React.FC = () => {
                   variant={formData[question.id] === value.toString() ? "filled" : "outline"}
                   color={highContrast ? "gray" : "blue"}
                   size="lg"
+                  radius="lg"
                   style={{
                     backgroundColor: formData[question.id] === value.toString() 
                       ? (highContrast ? '#ffffff' : undefined)
@@ -385,6 +388,7 @@ const Questionnaire: React.FC = () => {
             value={formData[question.id] as string || ''}
             onChange={(e) => handleInputChange(question.id, e.target.value)}
             rows={5}
+            radius="lg"
             placeholder={question.placeholder || ''}
             styles={{
               input: {
@@ -405,6 +409,7 @@ const Questionnaire: React.FC = () => {
             value={formData[question.id] as string || ''}
             onChange={(value) => handleInputChange(question.id, value?.toString() || '')}
             min={0}
+            radius="lg"
             placeholder={question.placeholder || ''}
             styles={{
               input: {
@@ -449,6 +454,7 @@ const Questionnaire: React.FC = () => {
                 : 'Return to home page?'}
             </Text>
           }
+          radius="lg"
           centered
         >
           <Stack gap="md">
@@ -458,10 +464,10 @@ const Questionnaire: React.FC = () => {
                 : 'Your current answers will be lost. Are you sure?'}
             </Text>
             <Group justify="flex-end" gap="sm">
-              <Button variant="outline" onClick={cancelGoHome}>
+              <Button variant="outline" radius="lg" onClick={cancelGoHome}>
                 {language === 'de' ? 'Abbrechen' : 'Cancel'}
               </Button>
-              <Button color="red" onClick={confirmGoHome}>
+              <Button color="red" radius="lg" onClick={confirmGoHome}>
                 {language === 'de' ? 'Ja, zurück' : 'Yes, go back'}
               </Button>
             </Group>
@@ -483,6 +489,9 @@ const Questionnaire: React.FC = () => {
                   color={highContrast ? "gray" : "gray"}
                   size="md"
                   className="home-button"
+                  style={{
+                    borderRadius: '50%',
+                  }}
                 >
                   <Home size={20} />
                 </ActionIcon>
@@ -565,6 +574,7 @@ const Questionnaire: React.FC = () => {
                   style={{
                     backgroundColor: highContrast ? '#ffffff' : undefined,
                     color: highContrast ? '#000000' : undefined,
+                    borderRadius: '50%',
                   }}
                 >
                   <Volume2 size={24} className={isReading ? 'animate-pulse' : ''} />
@@ -584,6 +594,7 @@ const Questionnaire: React.FC = () => {
                 <Alert 
                   icon={<XCircle size={16} />} 
                   color="red"
+                  radius="lg"
                   variant={highContrast ? "filled" : "light"}
                 >
                   {speechError}
@@ -594,6 +605,7 @@ const Questionnaire: React.FC = () => {
                 <Alert 
                   icon={<XCircle size={16} />} 
                   color="red"
+                  radius="lg"
                   variant={highContrast ? "filled" : "light"}
                 >
                   {language === 'de'
@@ -611,6 +623,7 @@ const Questionnaire: React.FC = () => {
                 variant={highContrast ? "filled" : "light"}
                 color={highContrast ? "gray" : "gray"}
                 size="lg"
+                radius="lg"
                 leftSection={<ChevronLeft size={20} />}
                 style={{
                   backgroundColor: highContrast ? '#ffffff' : undefined,
@@ -623,6 +636,7 @@ const Questionnaire: React.FC = () => {
               <Button
                 onClick={handleNext}
                 size="lg"
+                radius="lg"
                 variant={highContrast ? "filled" : "filled"}
                 color={highContrast ? "gray" : "blue"}
                 disabled={

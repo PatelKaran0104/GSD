@@ -19,9 +19,11 @@ const AccessibilityControls: React.FC = () => {
       className="accessibility-controls" 
       shadow="md" 
       p="md"
+      radius="lg"
       style={{
         backgroundColor: highContrast ? '#1e3a8a' : undefined,
         color: highContrast ? 'white' : undefined,
+        border: highContrast ? '2px solid #ffffff' : undefined,
       }}
     >
       <Group gap="sm">
@@ -32,6 +34,11 @@ const AccessibilityControls: React.FC = () => {
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
             size="lg"
+            style={{
+              borderRadius: '50%',
+              backgroundColor: highContrast ? '#ffffff' : undefined,
+              color: highContrast ? '#000000' : undefined,
+            }}
           >
             <ZoomOut size={20} />
           </ActionIcon>
@@ -44,6 +51,11 @@ const AccessibilityControls: React.FC = () => {
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
             size="lg"
+            style={{
+              borderRadius: '50%',
+              backgroundColor: highContrast ? '#ffffff' : undefined,
+              color: highContrast ? '#000000' : undefined,
+            }}
           >
             <ZoomIn size={20} />
           </ActionIcon>
@@ -55,6 +67,11 @@ const AccessibilityControls: React.FC = () => {
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
             size="lg"
+            style={{
+              borderRadius: '50%',
+              backgroundColor: highContrast ? '#ffffff' : undefined,
+              color: highContrast ? '#000000' : undefined,
+            }}
           >
             <Sun size={20} />
           </ActionIcon>
@@ -66,6 +83,11 @@ const AccessibilityControls: React.FC = () => {
             variant={highContrast ? "filled" : "light"}
             color={highContrast ? "gray" : "blue"}
             size="lg"
+            style={{
+              borderRadius: '50%',
+              backgroundColor: highContrast ? '#ffffff' : undefined,
+              color: highContrast ? '#000000' : undefined,
+            }}
           >
             <Languages size={20} />
           </ActionIcon>

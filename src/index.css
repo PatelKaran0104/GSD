@@ -9,7 +9,7 @@
   right: 0;
   padding: 1rem;
   z-index: 1000;
-  border-bottom-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.75rem;
 }
 
 .question-progress {
@@ -48,6 +48,48 @@
 
 .home-button {
   margin-left: 1rem;
+}
+
+/* Circular ActionIcon override */
+.mantine-ActionIcon-root {
+  border-radius: 50% !important;
+}
+
+/* Rounded corners for Papers */
+.mantine-Paper-root {
+  border-radius: 1rem !important;
+}
+
+/* Extra rounded for main containers */
+.main-container {
+  border-radius: 1.5rem !important;
+}
+
+/* Progress bar rounded */
+.mantine-Progress-root {
+  border-radius: 1rem !important;
+}
+
+.mantine-Progress-bar {
+  border-radius: 1rem !important;
+}
+
+/* Button rounded corners */
+.mantine-Button-root {
+  border-radius: 0.75rem !important;
+}
+
+/* Input rounded corners */
+.mantine-TextInput-input,
+.mantine-Textarea-input,
+.mantine-NumberInput-input {
+  border-radius: 0.75rem !important;
+}
+
+/* Radio and Checkbox containers */
+.radio-option-paper,
+.checkbox-option-paper {
+  border-radius: 0.75rem !important;
 }
 
 /* High contrast mode overrides */
