@@ -249,11 +249,10 @@ const Questionnaire: React.FC = () => {
             value={formData[question.id] as string || ''}
             onChange={(value) => handleInputChange(question.id, value)}
           >
-            <Stack gap="xl">
+            <Stack gap="lg">
               {question.options?.map((option, idx) => (
                 <Paper 
                   key={idx}
-                  p="xl" 
                   radius="lg"
                   className="radio-option-paper"
                   style={{
@@ -264,9 +263,6 @@ const Questionnaire: React.FC = () => {
                       ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                       : (highContrast ? '#000000' : '#ffffff'),
                     cursor: 'pointer',
-                    minHeight: '80px',
-                    display: 'flex',
-                    alignItems: 'center',
                   }}
                   onClick={() => handleInputChange(question.id, option.value)}
                 >
@@ -280,11 +276,6 @@ const Questionnaire: React.FC = () => {
                                  fontSize === 'text-3xl' ? '2rem' : '2.5rem',
                         fontWeight: 500,
                         color: highContrast ? '#ffffff' : undefined,
-                        lineHeight: 1.4,
-                      },
-                      radio: {
-                        width: '24px',
-                        height: '24px',
                       }
                     }}
                   />
@@ -300,7 +291,7 @@ const Questionnaire: React.FC = () => {
             value={(formData[question.id] as string[]) || []}
             onChange={(value) => handleInputChange(question.id, value)}
           >
-            <Stack gap="xl">
+            <Stack gap="lg">
               {question.options?.map((option, idx) => {
                 const selectedValues = (formData[question.id] as string[]) || [];
                 const isChecked = selectedValues.includes(option.value);
@@ -308,7 +299,6 @@ const Questionnaire: React.FC = () => {
                 return (
                   <Paper 
                     key={idx}
-                    p="xl" 
                     radius="lg"
                     className="checkbox-option-paper"
                     style={{
@@ -319,9 +309,6 @@ const Questionnaire: React.FC = () => {
                         ? (highContrast ? '#1e3a8a' : '#dbeafe') 
                         : (highContrast ? '#000000' : '#ffffff'),
                       cursor: 'pointer',
-                      minHeight: '80px',
-                      display: 'flex',
-                      alignItems: 'center',
                     }}
                     onClick={() => {
                       const currentValues = [...(formData[question.id] as string[] || [])];
@@ -341,11 +328,6 @@ const Questionnaire: React.FC = () => {
                                    fontSize === 'text-3xl' ? '2rem' : '2.5rem',
                           fontWeight: 500,
                           color: highContrast ? '#ffffff' : undefined,
-                          lineHeight: 1.4,
-                        },
-                        input: {
-                          width: '24px',
-                          height: '24px',
                         }
                       }}
                     />
@@ -506,7 +488,7 @@ const Questionnaire: React.FC = () => {
             mb="lg"
             style={{
               backgroundColor: highContrast ? '#000000' : '#ffffff',
-              border: highContrast ? '2px solid #ffffff' : undefined,
+              border: highContrast ? '2px solid #ffffff' : '2px solid #e5e7eb',
               color: highContrast ? '#ffffff' : undefined,
             }}
           >
@@ -580,13 +562,12 @@ const Questionnaire: React.FC = () => {
           
           {/* Question Content */}
           <Paper 
-            shadow="xl" 
             radius="lg" 
             p="xl" 
             mt={0}
             style={{
               backgroundColor: highContrast ? '#000000' : undefined,
-              border: highContrast ? '2px solid #ffffff' : undefined,
+              border: highContrast ? '2px solid #ffffff' : '2px solid #e5e7eb',
               color: highContrast ? '#ffffff' : undefined,
               borderTopLeftRadius: 0,
               borderTopRightRadius: 0,

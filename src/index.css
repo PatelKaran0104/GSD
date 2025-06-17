@@ -55,14 +55,16 @@
   border-radius: 50% !important;
 }
 
-/* Rounded corners for Papers */
+/* Rounded corners for Papers - REMOVE BOX SHADOWS */
 .mantine-Paper-root {
   border-radius: 1rem !important;
+  box-shadow: none !important;
 }
 
 /* Extra rounded for main containers */
 .main-container {
   border-radius: 1.5rem !important;
+  box-shadow: none !important;
 }
 
 /* Progress bar rounded */
@@ -79,7 +81,7 @@
   border-radius: 0.75rem !important;
 }
 
-/* Input rounded corners with bigger sizing */
+/* Input rounded corners with bigger sizing and hover effects */
 .mantine-TextInput-input,
 .mantine-Textarea-input,
 .mantine-NumberInput-input {
@@ -87,28 +89,57 @@
   min-height: 60px !important;
   padding: 16px 20px !important;
   font-size: 1.25rem !important;
+  border: 2px solid #e5e7eb !important;
+  transition: all 0.2s ease-in-out !important;
 }
 
-/* Radio and Checkbox containers - bigger and more spacious */
+.mantine-TextInput-input:hover,
+.mantine-Textarea-input:hover,
+.mantine-NumberInput-input:hover {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.mantine-TextInput-input:focus,
+.mantine-Textarea-input:focus,
+.mantine-NumberInput-input:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Radio and Checkbox containers - PERFECT ALIGNMENT */
 .radio-option-paper,
 .checkbox-option-paper {
   border-radius: 0.75rem !important;
   min-height: 80px !important;
-  padding: 24px !important;
-}
-
-/* Perfect alignment for radio and checkbox inputs */
-.mantine-Radio-root {
+  padding: 0 !important;
+  box-shadow: none !important;
+  border: 2px solid #e5e7eb !important;
+  transition: all 0.2s ease-in-out !important;
   display: flex !important;
   align-items: center !important;
+}
+
+.radio-option-paper:hover,
+.checkbox-option-paper:hover {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* PERFECT RADIO BUTTON ALIGNMENT */
+.mantine-Radio-root {
   width: 100% !important;
+  margin: 0 !important;
+  padding: 24px !important;
 }
 
 .mantine-Radio-body {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important;
+  gap: 20px !important;
   width: 100% !important;
+  margin: 0 !important;
 }
 
 .mantine-Radio-radio {
@@ -117,26 +148,32 @@
   min-width: 24px !important;
   flex-shrink: 0 !important;
   margin: 0 !important;
+  position: relative !important;
+  top: 0 !important;
 }
 
 .mantine-Radio-label {
   margin: 0 !important;
+  padding: 0 !important;
   flex: 1 !important;
   display: flex !important;
   align-items: center !important;
+  line-height: 1.4 !important;
 }
 
+/* PERFECT CHECKBOX ALIGNMENT */
 .mantine-Checkbox-root {
-  display: flex !important;
-  align-items: center !important;
   width: 100% !important;
+  margin: 0 !important;
+  padding: 24px !important;
 }
 
 .mantine-Checkbox-body {
   display: flex !important;
   align-items: center !important;
-  gap: 16px !important;
+  gap: 20px !important;
   width: 100% !important;
+  margin: 0 !important;
 }
 
 .mantine-Checkbox-input {
@@ -145,21 +182,41 @@
   min-width: 24px !important;
   flex-shrink: 0 !important;
   margin: 0 !important;
+  position: relative !important;
+  top: 0 !important;
 }
 
 .mantine-Checkbox-label {
   margin: 0 !important;
+  padding: 0 !important;
   flex: 1 !important;
   display: flex !important;
   align-items: center !important;
+  line-height: 1.4 !important;
 }
 
-/* Scale buttons - bigger and more spacious */
+/* Scale buttons - bigger and more spacious with hover effects */
 .scale-button-grid button {
   min-height: 80px !important;
   min-width: 80px !important;
   font-size: 1.5rem !important;
   font-weight: 700 !important;
+  transition: all 0.2s ease-in-out !important;
+  box-shadow: none !important;
+}
+
+.scale-button-grid button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Remove all box shadows globally */
+.mantine-Paper-root,
+.mantine-Button-root,
+.mantine-ActionIcon-root,
+.mantine-Modal-root,
+.mantine-Alert-root {
+  box-shadow: none !important;
 }
 
 /* Tooltip z-index fix - ensure tooltips appear in front */
@@ -190,16 +247,19 @@
   background-color: #000000 !important;
   border: 2px solid #ffffff !important;
   color: #ffffff !important;
+  box-shadow: none !important;
 }
 
 .high-contrast .mantine-Button-root {
   background-color: #ffffff !important;
   color: #000000 !important;
   border-color: #ffffff !important;
+  box-shadow: none !important;
 }
 
 .high-contrast .mantine-Button-root:hover {
   background-color: #cccccc !important;
+  box-shadow: none !important;
 }
 
 .high-contrast .mantine-Progress-root {
@@ -223,10 +283,29 @@
   border-color: #ffffff !important;
 }
 
+.high-contrast .mantine-TextInput-input:hover,
+.high-contrast .mantine-Textarea-input:hover,
+.high-contrast .mantine-NumberInput-input:hover {
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+}
+
+.high-contrast .radio-option-paper,
+.high-contrast .checkbox-option-paper {
+  border-color: #ffffff !important;
+}
+
+.high-contrast .radio-option-paper:hover,
+.high-contrast .checkbox-option-paper:hover {
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+}
+
 .high-contrast .mantine-Alert-root {
   background-color: #660000 !important;
   color: #ffffff !important;
   border-color: #ffffff !important;
+  box-shadow: none !important;
 }
 
 /* High contrast tooltips */
